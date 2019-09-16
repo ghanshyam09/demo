@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
@@ -32,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView Info;
     private Button Signup;
     private FirebaseAuth fire;
+    private ProgressDialog progress;
     //ConstraintLayout layout;
     private int cnt=5;
     @Override
@@ -49,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
         mail=findViewById(R.id.editText3);
         Signup =findViewById(R.id.button);
          fire= fire.getInstance();
-
+              progress=new ProgressDialog(this);
         //Info.setText("No. of attempts remaining 5");
         Info.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -80,6 +82,8 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(MainActivity.this,"Please enter the Password",Toast.LENGTH_SHORT).show();
                     return;
                 }
+
+
                 fire.createUserWithEmailAndPassword(e, p)
                         .addOnCompleteListener( new OnCompleteListener<AuthResult>() {
                             @Override
@@ -87,12 +91,14 @@ public class MainActivity extends AppCompatActivity {
                                 if (task.isSuccessful()) {
                                     //Intent intent=new Intent(MainActivity.this,SecondActivity.class);
                                     //startActivity(intent);
+                                    //progress.setVisibility(View.GONE);
                                     Toast.makeText(MainActivity.this,"Successful",Toast.LENGTH_SHORT).show();
                                     FirebaseUser user=fire.getCurrentUser();
                                     user.sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
                                         @Override
                                         public void onComplete(@NonNull Task<Void> task) {
                                             if(task.isSuccessful()){
+
                                                 Toast.makeText(MainActivity.this,"Please check your mail",Toast.LENGTH_SHORT).show();
                                             }else{
                                                 String error=task.getException().getMessage();
