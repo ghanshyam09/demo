@@ -82,17 +82,16 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(MainActivity.this,"Please enter the Password",Toast.LENGTH_SHORT).show();
                     return;
                 }
-
-
+                progress.setMessage("Registering");
+                progress.show();
                 fire.createUserWithEmailAndPassword(e, p)
                         .addOnCompleteListener( new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if (task.isSuccessful()) {
-                                    //Intent intent=new Intent(MainActivity.this,SecondActivity.class);
-                                    //startActivity(intent);
-                                    //progress.setVisibility(View.GONE);
+
                                     Toast.makeText(MainActivity.this,"Successful",Toast.LENGTH_SHORT).show();
+                                    progress.cancel();
                                     FirebaseUser user=fire.getCurrentUser();
                                     user.sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
                                         @Override
@@ -100,6 +99,9 @@ public class MainActivity extends AppCompatActivity {
                                             if(task.isSuccessful()){
 
                                                 Toast.makeText(MainActivity.this,"Please check your mail",Toast.LENGTH_SHORT).show();
+                                                mail.setText("");
+                                                pasword.setText("");
+                                                Name.setText("");
                                             }else{
                                                 String error=task.getException().getMessage();
                                                 Toast.makeText(MainActivity.this,"error"+error,Toast.LENGTH_SHORT).show();

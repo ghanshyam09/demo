@@ -1,5 +1,6 @@
 package com.example.demo;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -20,6 +21,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.view.Menu;
+import android.widget.Toast;
 
 public class FourActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -85,13 +87,17 @@ public class FourActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_home) {
+        if (id == R.id.home) {
             // Handle the camera action
+            Intent intent=new Intent(this,FourActivity.class);
+            startActivity(intent);
+            Toast.makeText(FourActivity.this,"Successful",Toast.LENGTH_SHORT).show();
+
         } else if (id == R.id.nav_gallery) {
 
-        } else if (id == R.id.nav_slideshow) {
+        } else if (id == R.id.Logout) {
 
-        } else if (id == R.id.nav_tools) {
+        } else if (id == R.id.settings) {
 
         } else if (id == R.id.nav_share) {
 

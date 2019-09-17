@@ -58,8 +58,13 @@ public class SecondActivity extends AppCompatActivity {
                                 @Override
                                 public void onComplete(@NonNull Task<AuthResult> task) {
                                     if (task.isSuccessful()) {
-                                        startActivity(new Intent(SecondActivity.this,FourActivity.class) );
-                                        Toast.makeText(SecondActivity.this,"Login Successful",Toast.LENGTH_SHORT).show();
+                                        if(fire.getCurrentUser().isEmailVerified()) {
+                                            startActivity(new Intent(SecondActivity.this, FourActivity.class));
+                                            Toast.makeText(SecondActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
+                                        }
+                                        else{
+                                            Toast.makeText(SecondActivity.this, "Pleas verify the Email address", Toast.LENGTH_SHORT).show();
+                                        }
                                     } else {
                                         Toast.makeText(SecondActivity.this,"login Failed",Toast.LENGTH_SHORT).show();
                                     }
