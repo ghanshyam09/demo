@@ -94,7 +94,7 @@ public class FourActivity extends AppCompatActivity
             Toast.makeText(FourActivity.this,"Successful",Toast.LENGTH_SHORT).show();
 
         } else if (id == R.id.feedback) {
-
+            startActivity(new Intent(this,Feedback.class));
         } else if (id == R.id.Logout) {
              fire.getInstance().signOut();
              finish();

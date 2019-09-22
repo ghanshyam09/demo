@@ -19,7 +19,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class SecondActivity extends AppCompatActivity {
-    private EditText email;
+    EditText email;
     private EditText password;
     private TextView reset;
     private Button log;
