@@ -71,16 +71,23 @@ public class MainActivity extends AppCompatActivity {
                 String e=mail.getText().toString().trim();
                // info.setText("No. of attempts remaining 5");
                 if(TextUtils.isEmpty(n)){
+                    Name.requestFocus();
                     Toast.makeText(MainActivity.this,"Please enter the name",Toast.LENGTH_SHORT).show();
                     return;
                 }
                 if(TextUtils.isEmpty(e)){
+                    mail.requestFocus();
                     Toast.makeText(MainActivity.this,"Please enter the Email",Toast.LENGTH_SHORT).show();
                     return;
                 }
                 if(TextUtils.isEmpty(p)){
+                    pasword.requestFocus();
                     Toast.makeText(MainActivity.this,"Please enter the Password",Toast.LENGTH_SHORT).show();
                     return;
+                }
+                if(pasword.length()<6)
+                {
+                    pasword.setError("Minmum length of password should be 6");
                 }
                 progress.setMessage("Registering");
                 progress.show();
@@ -89,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if (task.isSuccessful()) {
-
+                                    progress.cancel();
                                     Toast.makeText(MainActivity.this,"Successful",Toast.LENGTH_SHORT).show();
                                     progress.cancel();
                                     FirebaseUser user=fire.getCurrentUser();
@@ -111,6 +118,7 @@ public class MainActivity extends AppCompatActivity {
 
                                 } else {
                                     //task.getException();
+                                    progress.cancel();
                                     Toast.makeText(MainActivity.this,"check the email and password",Toast.LENGTH_SHORT).show();
                                 }
 

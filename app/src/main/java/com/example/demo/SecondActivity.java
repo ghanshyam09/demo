@@ -3,6 +3,7 @@ package com.example.demo;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -23,6 +24,7 @@ public class SecondActivity extends AppCompatActivity {
     private TextView reset;
     private Button log;
     private FirebaseAuth fire;
+    private ProgressDialog progress;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,6 +34,7 @@ public class SecondActivity extends AppCompatActivity {
         log=findViewById(R.id.button2);
         reset=findViewById(R.id.textView7);
         fire=fire.getInstance();
+         progress=new ProgressDialog(this);
         reset.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -51,21 +54,26 @@ public class SecondActivity extends AppCompatActivity {
                     Toast.makeText(SecondActivity.this, "Please enter the Password", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                else{
 
+                else{
+                    progress.setMessage("Logging in");
+                    progress.show();
                     fire.signInWithEmailAndPassword(mail, pword)
                             .addOnCompleteListener(SecondActivity.this, new OnCompleteListener<AuthResult>() {
                                 @Override
                                 public void onComplete(@NonNull Task<AuthResult> task) {
                                     if (task.isSuccessful()) {
+                                        progress.cancel();
                                         if(fire.getCurrentUser().isEmailVerified()) {
                                             startActivity(new Intent(SecondActivity.this, FourActivity.class));
                                             Toast.makeText(SecondActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
                                         }
                                         else{
+                                            progress.cancel();
                                             Toast.makeText(SecondActivity.this, "Pleas verify the Email address", Toast.LENGTH_SHORT).show();
                                         }
                                     } else {
+                                        progress.cancel();
                                         Toast.makeText(SecondActivity.this,"login Failed",Toast.LENGTH_SHORT).show();
                                     }
 
