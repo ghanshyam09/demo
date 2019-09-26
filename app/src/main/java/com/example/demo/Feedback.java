@@ -20,7 +20,6 @@ import java.util.HashMap;
 
 public class Feedback extends AppCompatActivity {
     private Firebase ref;
-    private FirebaseAuth fire;
     private RatingBar rating;
     private EditText feedbackToFirebase;
     private Button send;
@@ -41,10 +40,14 @@ public class Feedback extends AppCompatActivity {
 
 
     public void sendtofirebase(View view) {
-
+    EditText Name;
+        //Name = findViewById(R.id.etuser);
 
         auth=FirebaseAuth.getInstance();
-        data=FirebaseDatabase.getInstance().getReference().child("Users").child(auth.getCurrentUser().getUid());
+        data=FirebaseDatabase.getInstance().getReference().child("Users");
+//        HashMap<String,String> user=new HashMap<>();
+//        user.put("Username",Name.getText().toString());
+//        data.push().setValue(r)
       //  FirebaseUser user=auth.getCurrentUser();
         String feed=feedbackToFirebase.getText().toString().trim();
         Float r=rating.getRating();
