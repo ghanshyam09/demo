@@ -3,6 +3,7 @@
     package="com.example.demo">
 
     <uses-permission android:name="android.permission.Internet" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -12,7 +13,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Feedback"></activity>
+        <activity android:name=".Resultactivity"></activity>
+        <activity android:name=".Feedback" />
         <activity
             android:name=".FourActivity"
             android:label="@string/title_activity_four"
@@ -32,6 +34,7 @@
             android:label="@string/title_activity_login" />
         <activity android:name=".SecondActivity" />
         <activity android:name=".MainActivity" />
+        <activity android:name=".Quiz" />
     </application>
 
 </manifest>

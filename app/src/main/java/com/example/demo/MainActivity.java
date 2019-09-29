@@ -1,31 +1,23 @@
 package com.example.demo;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
-
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
-import android.view.animation.Animation;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.FirebaseException;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.PhoneAuthCredential;
-import com.google.firebase.auth.PhoneAuthProvider;
-
-import java.lang.reflect.Array;
 
 public class MainActivity extends AppCompatActivity {
     private EditText Name,mail;
@@ -104,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
                                         @Override
                                         public void onComplete(@NonNull Task<Void> task) {
                                             if(task.isSuccessful()){
-
+                                               //  senduser();
                                                 Toast.makeText(MainActivity.this,"Please check your mail",Toast.LENGTH_SHORT).show();
                                                 mail.setText("");
                                                 pasword.setText("");
@@ -128,7 +120,14 @@ public class MainActivity extends AppCompatActivity {
                 
             }
         });
-        
+//        private void senduser()
+//        {
+//            user usr =new user(Name,mail);
+//                Firebase ref_name=ref_id.child("username");
+//                ref_name.setValue(name);
+//                Firebase ref_email=ref_id.child("email_id");
+//                ref_email.setValue(email);
+        //}
     }
 
 }
