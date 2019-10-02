@@ -2,36 +2,32 @@ package com.example.demo;
 
 import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.core.view.GravityCompat;
-import androidx.appcompat.app.ActionBarDrawerToggle;
-
+import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.Toast;
+
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 
-import androidx.drawerlayout.widget.DrawerLayout;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
-import android.view.Menu;
-import android.widget.TextView;
-import android.widget.Toast;
-
 public class FourActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-    FirebaseAuth fire;
-    
+     FirebaseAuth fire;
+    private Button Next;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_four);
-
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
         //FloatingActionButton fab = findViewById(R.id.fab);
 //        fab.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -47,6 +43,16 @@ public class FourActivity extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
+        Next=(Button)findViewById(R.id.bn);
+        Next.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                Intent intent=new Intent(FourActivity.this,Quiz.class);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -93,13 +99,13 @@ public class FourActivity extends AppCompatActivity
             startActivity(intent);
             Toast.makeText(FourActivity.this,"Successful",Toast.LENGTH_SHORT).show();
 
-        } else if (id == R.id.feedback) {
-            startActivity(new Intent(this,Feedback.class));
-        } else if (id == R.id.Logout) {
-             fire.getInstance().signOut();
-             finish();
-             startActivity(new Intent(this,SecondActivity.class));
+        } else if (id == R.id.nav_gallery) {
 
+        } else if (id == R.id.Logout) {
+            fire.getInstance().signOut();
+            finish();
+            Intent intent=new Intent(FourActivity.this,SecondActivity.class);
+            startActivity(intent);
         } else if (id == R.id.settings) {
 
         } else if (id == R.id.nav_share) {
