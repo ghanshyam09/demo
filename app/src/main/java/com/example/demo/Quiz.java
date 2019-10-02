@@ -23,6 +23,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.Random;
+
 public class Quiz extends AppCompatActivity
 {
 
@@ -56,14 +58,16 @@ public class Quiz extends AppCompatActivity
     }
     public void updatequestion()
     {
+        int random= new  Random().nextInt(9)+1;
         total++;
 
         if(total>10)
         {
             //tv.setText("completed");
             //total--;
-
-                    Intent intent = new Intent(Quiz.this,Feedback.class);
+           // mCountDownTimer.cancel();
+            finish();
+            Intent intent = new Intent(Quiz.this,Feedback.class);
                     /*intent.putExtra("Total Questions",String.valueOf(total));
                     intent.putExtra("Score",String.valueOf(score));*/
                     startActivity(intent);
@@ -73,7 +77,7 @@ public class Quiz extends AppCompatActivity
         }
         else
         {
-            reference= FirebaseDatabase.getInstance().getReference().child("Question").child(String.valueOf(total));
+            reference= FirebaseDatabase.getInstance().getReference().child("Question").child(String.valueOf(random));
             reference.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

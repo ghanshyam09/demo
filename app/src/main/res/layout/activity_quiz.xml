@@ -48,37 +48,41 @@
         android:id="@+id/op2"
         android:layout_width="298dp"
         android:layout_height="56dp"
+        android:layout_marginTop="8dp"
         android:gravity="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.38"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.552" />
+        app:layout_constraintTop_toBottomOf="@+id/op1"
+        app:layout_constraintVertical_bias="0.064" />
 
     <Button
         android:id="@+id/op4"
         android:layout_width="298dp"
         android:layout_height="56dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="15dp"
         android:gravity="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.38"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.801" />
+        app:layout_constraintTop_toBottomOf="@+id/op3"
+        app:layout_constraintVertical_bias="0.111" />
 
     <Button
         android:id="@+id/op3"
         android:layout_width="298dp"
         android:layout_height="56dp"
+        android:layout_marginTop="8dp"
         android:gravity="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.38"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.677" />
+        app:layout_constraintTop_toBottomOf="@+id/op2"
+        app:layout_constraintVertical_bias="0.095" />
 
     <TextView
         android:id="@+id/timer"

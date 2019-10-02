@@ -66,15 +66,17 @@ public class SecondActivity extends AppCompatActivity {
                                         progress.cancel();
                                         if(fire.getCurrentUser().isEmailVerified()) {
                                             startActivity(new Intent(SecondActivity.this, FourActivity.class));
+                                            email.setText("");
+                                            password.setText("");
                                             Toast.makeText(SecondActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
                                         }
                                         else{
                                             progress.cancel();
-                                            Toast.makeText(SecondActivity.this, "Pleas verify the Email address", Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(SecondActivity.this, "Please verify the Email address", Toast.LENGTH_SHORT).show();
                                         }
                                     } else {
                                         progress.cancel();
-                                        Toast.makeText(SecondActivity.this,"login Failed",Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(SecondActivity.this,"Please check your email and password ",Toast.LENGTH_SHORT).show();
                                     }
 
                                     // ...
