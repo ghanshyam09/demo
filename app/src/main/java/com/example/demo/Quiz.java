@@ -33,7 +33,7 @@ public class Quiz extends AppCompatActivity
     private TextView question,quecount,counter;
    public int total=0;
     public int score=0;
-     public int qcounter=4;
+     public int qcounter=10;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,7 +58,7 @@ public class Quiz extends AppCompatActivity
     {
         total++;
 
-        if(total>4)
+        if(total>10)
         {
             //tv.setText("completed");
             //total--;
@@ -67,7 +67,7 @@ public class Quiz extends AppCompatActivity
                     /*intent.putExtra("Total Questions",String.valueOf(total));
                     intent.putExtra("Score",String.valueOf(score));*/
                     startActivity(intent);
-                    // finish();
+                     finish();
 
 
         }
@@ -80,10 +80,10 @@ public class Quiz extends AppCompatActivity
                     final Questions questions=dataSnapshot.getValue(Questions.class);
 
                     question.setText(questions.getQuestion());
-                    b1.setText(String.valueOf(questions.getOption1()));
-                    b2.setText(String.valueOf(questions.getOption2()));
-                    b3.setText(String.valueOf(questions.getOption3()));
-                    b4.setText(String.valueOf(questions.getOption4()));
+                    b1.setText(questions.getOption1());
+                    b2.setText(questions.getOption2());
+                    b3.setText(questions.getOption3());
+                    b4.setText(questions.getOption4());
 
                     b1.setBackgroundColor(Color.parseColor("#03A9F4"));
                     b2.setBackgroundColor(Color.parseColor("#03A9F4"));
@@ -93,7 +93,7 @@ public class Quiz extends AppCompatActivity
                     b1.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            if(b1.getText().toString().equals(String.valueOf(questions.getAnswer())))
+                            if(b1.getText().toString().equals(questions.getAnswer()))
                             {
                                 Toast.makeText(Quiz.this,"Correct answer",Toast.LENGTH_SHORT).show();
                                 score++;
@@ -114,15 +114,15 @@ public class Quiz extends AppCompatActivity
                             {
                                 Toast.makeText(Quiz.this,"wrong answer",Toast.LENGTH_SHORT).show();
                                b1.setBackgroundColor(Color.RED);
-                               if(b2.getText().toString().equals(String.valueOf(questions.getAnswer())))
+                               if(b2.getText().toString().equals(questions.getAnswer()))
                                {
                                    b2.setBackgroundColor(Color.GREEN);
                                }
-                               else if(b3.getText().toString().equals(String.valueOf(questions.getAnswer())))
+                               else if(b3.getText().toString().equals(questions.getAnswer()))
                                {
                                    b3.setBackgroundColor(Color.GREEN);
                                }
-                               else if(b4.getText().toString().equals(String.valueOf(questions.getAnswer())))
+                               else if(b4.getText().toString().equals(questions.getAnswer()))
                                {
                                    b4.setBackgroundColor(Color.GREEN);
                                }
@@ -143,7 +143,7 @@ public class Quiz extends AppCompatActivity
                     b2.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            if(b2.getText().toString().equals(String.valueOf(questions.getAnswer())))
+                            if(b2.getText().toString().equals(questions.getAnswer()))
                             {
                                 Toast.makeText(Quiz.this,"Correct answer",Toast.LENGTH_SHORT).show();
                                 score++;
@@ -165,15 +165,15 @@ public class Quiz extends AppCompatActivity
                             {
                                 Toast.makeText(Quiz.this,"wrong answer",Toast.LENGTH_SHORT).show();
                                 b2.setBackgroundColor(Color.RED);
-                                if(b1.getText().toString().equals(String.valueOf(questions.getAnswer())))
+                                if(b1.getText().toString().equals(questions.getAnswer()))
                                 {
                                     b1.setBackgroundColor(Color.GREEN);
                                 }
-                                else if(b3.getText().toString().equals(String.valueOf(questions.getAnswer())))
+                                else if(b3.getText().toString().equals(questions.getAnswer()))
                                 {
                                     b3.setBackgroundColor(Color.GREEN);
                                 }
-                                else if(b4.getText().toString().equals(String.valueOf(questions.getAnswer())))
+                                else if(b4.getText().toString().equals(questions.getAnswer()))
                                 {
                                     b4.setBackgroundColor(Color.GREEN);
                                 }
@@ -194,7 +194,7 @@ public class Quiz extends AppCompatActivity
                     b3.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            if(b3.getText().toString().equals(String.valueOf(questions.getAnswer())))
+                            if(b3.getText().toString().equals(questions.getAnswer()))
                             {
                                 Toast.makeText(Quiz.this,"Correct answer",Toast.LENGTH_SHORT).show();
                                 score++;
@@ -216,15 +216,15 @@ public class Quiz extends AppCompatActivity
                             {
                                 Toast.makeText(Quiz.this,"wrong answer",Toast.LENGTH_SHORT).show();
                                 b3.setBackgroundColor(Color.RED);
-                                if(b1.getText().toString().equals(String.valueOf(questions.getAnswer())))
+                                if(b1.getText().toString().equals(questions.getAnswer()))
                                 {
                                     b1.setBackgroundColor(Color.GREEN);
                                 }
-                                else if(b2.getText().toString().equals(String.valueOf(questions.getAnswer())))
+                                else if(b2.getText().toString().equals(questions.getAnswer()))
                                 {
                                     b2.setBackgroundColor(Color.GREEN);
                                 }
-                                else if(b4.getText().toString().equals(String.valueOf(questions.getAnswer())))
+                                else if(b4.getText().toString().equals(questions.getAnswer()))
                                 {
                                     b4.setBackgroundColor(Color.GREEN);
                                 }
@@ -245,7 +245,7 @@ public class Quiz extends AppCompatActivity
                     b4.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            if(b4.getText().toString().equals(String.valueOf(questions.getAnswer())))
+                            if(b4.getText().toString().equals(questions.getAnswer()))
                             {
                                 Toast.makeText(Quiz.this,"Correct answer",Toast.LENGTH_SHORT).show();
                                 score++;
@@ -267,15 +267,15 @@ public class Quiz extends AppCompatActivity
                             {
                                 Toast.makeText(Quiz.this,"wrong answer",Toast.LENGTH_SHORT).show();
                                 b4.setBackgroundColor(Color.RED);
-                                if(b1.getText().toString().equals(String.valueOf(questions.getAnswer())))
+                                if(b1.getText().toString().equals(questions.getAnswer()))
                                 {
                                     b1.setBackgroundColor(Color.GREEN);
                                 }
-                                else if(b2.getText().toString().equals(String.valueOf(questions.getAnswer())))
+                                else if(b2.getText().toString().equals(questions.getAnswer()))
                                 {
                                     b2.setBackgroundColor(Color.GREEN);
                                 }
-                                else if(b3.getText().toString().equals(String.valueOf(questions.getAnswer())))
+                                else if(b3.getText().toString().equals(questions.getAnswer()))
                                 {
                                     b3.setBackgroundColor(Color.GREEN);
                                 }
@@ -292,8 +292,9 @@ public class Quiz extends AppCompatActivity
                                 },500);
                             }
                         }
-                    });
-
+                    })/**/;
+                // total++;
+                 quecount.setText("Questions: "+total+"/"+qcounter);
                 }
 
                 @Override
@@ -302,11 +303,15 @@ public class Quiz extends AppCompatActivity
                 }
             });
         }
-        quecount.setText("Questions: "+total+"/"+qcounter);
+        auth=FirebaseAuth.getInstance();
+        Firebase ref_id=ref.child(auth.getCurrentUser().getUid());
+        Firebase ref_score=ref_id.child("Score");
+        ref_score.setValue(score);
+
     }
 
     public void reverseTimer(int seconds ,final TextView tv ){
-        new CountDownTimer(seconds* 1000+1000,1000)
+        final CountDownTimer mCountDownTimer=new CountDownTimer(seconds* 1000+1000,1000)
         {
 
             public void onTick(long millisUntilFinished){
@@ -319,22 +324,43 @@ public class Quiz extends AppCompatActivity
             @Override
             public void onFinish() {
 
-                tv.setText("completed");
+
+                //tv.setText("completed");
                 /*Intent intent = new Intent(Quiz.this,Resultactivity.class);
                 intent.putExtra("Total Questions",String.valueOf(total));
                 intent.putExtra("Score",String.valueOf(score));
                 startActivity(intent);*/
-                Intent intent = new Intent(Quiz.this,Feedback.class);
+                Intent intent = new Intent(Quiz.this, Feedback.class);
                 startActivity(intent);
+                finish();
             }
         }.start();
-    }
-    public void sendtofirebase(View view)
-    {
-        auth=FirebaseAuth.getInstance();
-        Firebase ref_id=ref.child(auth.getCurrentUser().getUid());
-        Firebase ref_score=ref_id.child("Score: ");
-        ref_score.setValue(score);
+         CountDownTimer assist=new CountDownTimer(seconds*1000+1000,1000) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+                /*if(true)
+                {
+                    mCountDownTimer.cancel();
+                }*/
+            }
+
+            @Override
+            public void onFinish() {
+              if(total>10)
+                {
+                    //tv.setText("completed");
+                    //assist.cancel();
+                     mCountDownTimer.cancel();
+                     //finish();
+                }
+                /*else {
+                    Intent intent = new Intent(Quiz.this, Feedback.class);
+                    startActivity(intent);
+                    finish();
+                }*/
+
+            }
+        };
     }
 
 }
