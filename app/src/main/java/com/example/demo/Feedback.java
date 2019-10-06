@@ -67,6 +67,7 @@ public class Feedback extends AppCompatActivity {
 //                ref_email.setValue(email);
         Intent intent=new Intent(Feedback.this,FourActivity.class);
         startActivity(intent);
+
         finish();
     }
 

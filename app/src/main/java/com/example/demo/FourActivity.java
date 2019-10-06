@@ -106,6 +106,7 @@ public class FourActivity extends AppCompatActivity
             finish();
             Intent intent=new Intent(FourActivity.this,SecondActivity.class);
             startActivity(intent);
+            finish();
         } else if (id == R.id.settings) {
 
         } else if (id == R.id.nav_share) {

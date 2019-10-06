@@ -58,20 +58,26 @@ public class Quiz extends AppCompatActivity
     }
     public void updatequestion()
     {
-        int random= new  Random().nextInt(9)+1;
+       int random= new  Random().nextInt(9)+1;
         total++;
 
         if(total>10)
         {
             //tv.setText("completed");
             //total--;
-           // mCountDownTimer.cancel();
-            finish();
-            Intent intent = new Intent(Quiz.this,Feedback.class);
-                    /*intent.putExtra("Total Questions",String.valueOf(total));
-                    intent.putExtra("Score",String.valueOf(score));*/
+              //mCountDownTimer.cancel()
+
+                    Intent intent = new Intent(Quiz.this,Resultactivity.class);
+                    //intent.putExtra("Total Questions",String.valueOf(total));
+                    intent.putExtra("Score",String.valueOf(score));
                     startActivity(intent);
-                     finish();
+                    finish();
+
+            /*Intent intent = new Intent(Quiz.this,Feedback.class);
+                    intent.putExtra("Total Questions",String.valueOf(total));
+                    intent.putExtra("Score",String.valueOf(score));
+                    startActivity(intent);
+                     finish();*/
 
 
         }
@@ -314,15 +320,15 @@ public class Quiz extends AppCompatActivity
 
     }
 
-    public void reverseTimer(int seconds ,final TextView tv ){
-        final CountDownTimer mCountDownTimer=new CountDownTimer(seconds* 1000+1000,1000)
-        {
+    public void reverseTimer(int seconds ,final TextView tv ) {
+        final CountDownTimer mCountDownTimer=new CountDownTimer(seconds * 1000 + 1000, 1000) {
 
-            public void onTick(long millisUntilFinished){
-                 int seconds=(int) (millisUntilFinished/1000);
-                 int minutes=seconds/60;
-                 seconds=seconds % 60;
-                 tv.setText(String.format("%02d",minutes)+ ":" + (String.format("%02d",seconds)));
+            public void onTick(long millisUntilFinished) {
+                int seconds = (int) (millisUntilFinished / 1000);
+                int minutes = seconds / 60;
+                seconds = seconds % 60;
+                tv.setText(String.format("%02d", minutes) + ":" + (String.format("%02d", seconds)));
+                //finish();
             }
 
             @Override
@@ -330,41 +336,42 @@ public class Quiz extends AppCompatActivity
 
 
                 //tv.setText("completed");
-                /*Intent intent = new Intent(Quiz.this,Resultactivity.class);
-                intent.putExtra("Total Questions",String.valueOf(total));
-                intent.putExtra("Score",String.valueOf(score));
+
+              /*  Intent intent = new Intent(Quiz.this, Resultactivity.class);
+                //intent.putExtra("Total Questions",String.valueOf(total));
+                intent.putExtra("Score", String.valueOf(score));
                 startActivity(intent);*/
-                Intent intent = new Intent(Quiz.this, Feedback.class);
+
+
+                /*Intent intent = new Intent(Quiz.this, Feedback.class);
                 startActivity(intent);
-                finish();
+                finish();*/
             }
         }.start();
-         CountDownTimer assist=new CountDownTimer(seconds*1000+1000,1000) {
+        new CountDownTimer(seconds*1000+1000,1000) {
             @Override
             public void onTick(long millisUntilFinished) {
-                /*if(true)
-                {
-                    mCountDownTimer.cancel();
-                }*/
+
             }
 
             @Override
             public void onFinish() {
-              if(total>10)
-                {
+                if (total > 10) {
                     //tv.setText("completed");
                     //assist.cancel();
-                     mCountDownTimer.cancel();
-                     //finish();
+                    mCountDownTimer.cancel();
+                    //finish();
                 }
-                /*else {
-                    Intent intent = new Intent(Quiz.this, Feedback.class);
+                else
+                {
+                    Intent intent = new Intent(Quiz.this, Resultactivity.class);
+                    //intent.putExtra("Total Questions",String.valueOf(total));
+                    intent.putExtra("Score", String.valueOf(score));
                     startActivity(intent);
-                    finish();
-                }*/
-
+                }
             }
         };
+
     }
 
 }

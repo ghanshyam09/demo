@@ -4,60 +4,53 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/result"
     tools:context=".Resultactivity">
 
     <TextView
-        android:id="@+id/totalque"
-        android:layout_width="134dp"
-        android:layout_height="41dp"
+        android:id="@+id/text"
+        android:layout_width="337dp"
+        android:layout_height="149dp"
+        android:fontFamily="cursive"
         android:gravity="center"
-        android:text="Total Questions :"
+        android:text="Your Score Is :"
         android:textAlignment="center"
-        android:textSize="18sp"
+        android:textColor="#9C27B0"
+        android:textColorHighlight="#3F51B5"
+        android:textSize="46sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.241"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.153" />
+        app:layout_constraintVertical_bias="0.106" />
 
     <TextView
         android:id="@+id/tscore"
-        android:layout_width="117dp"
-        android:layout_height="42dp"
+        android:layout_width="118dp"
+        android:layout_height="69dp"
         android:gravity="center"
         android:text="Score :"
-        android:textSize="18sp"
+        android:textColor="#F8FFFFFF"
+        android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.241"
+        app:layout_constraintHorizontal_bias="0.285"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.283" />
-
-    <TextView
-        android:id="@+id/vtotalque"
-        android:layout_width="101dp"
-        android:layout_height="43dp"
-        android:gravity="center"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.787"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.151" />
+        app:layout_constraintVertical_bias="0.499" />
 
     <TextView
         android:id="@+id/vscore"
-        android:layout_width="91dp"
-        android:layout_height="42dp"
+        android:layout_width="108dp"
+        android:layout_height="58dp"
         android:gravity="center"
+        android:textColor="#FCFFFFFF"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.762"
+        app:layout_constraintHorizontal_bias="0.806"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.283" />
+        app:layout_constraintVertical_bias="0.499" />
 </androidx.constraintlayout.widget.ConstraintLayout>

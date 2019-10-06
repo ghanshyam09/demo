@@ -5,7 +5,7 @@
     android:id="@+id/layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/photo"
+    android:background="@drawable/fade"
     android:theme="@style/AppTheme"
     tools:context=".MainActivity">
 
@@ -165,9 +165,9 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
+        android:fontFamily="cursive"
         android:text="@string/sign_up"
         android:textSize="28dp"
-        android:fontFamily="cursive"
         app:layout_constraintBottom_toTopOf="@+id/etuser"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
