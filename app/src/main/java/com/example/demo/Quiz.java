@@ -357,29 +357,29 @@ public class Quiz extends AppCompatActivity
                 finish();*/
             }
         }.start();
-//        new CountDownTimer(seconds*1000+1000,1000) {
-//            @Override
-//            public void onTick(long millisUntilFinished) {
-//
-//            }
-//
-//            @Override
-//            public void onFinish() {
-//                if (total > 10) {
-//                    //tv.setText("completed");
-//                    //assist.cancel();
-//                    mCountDownTimer.cancel();
-//                    //finish();
-//                }
-//                else
-//                {
-//                    Intent intent = new Intent(Quiz.this, Resultactivity.class);
-//                    //intent.putExtra("Total Questions",String.valueOf(total));
-//                    intent.putExtra("Score", String.valueOf(score));
-//                    startActivity(intent);
-//                }
-//            }
-//        };
+        new CountDownTimer(seconds*1000+1000,1000) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+
+            }
+
+            @Override
+            public void onFinish() {
+                if (total > 10) {
+                    //tv.setText("completed");
+                    //assist.cancel();
+                    mCountDownTimer.cancel();
+                    //finish();
+                }
+                else
+                {
+                    Intent intent = new Intent(Quiz.this, Resultactivity.class);
+                    //intent.putExtra("Total Questions",String.valueOf(total));
+                    intent.putExtra("Score", String.valueOf(score));
+                    startActivity(intent);
+                }
+            }
+        };
 
     }
 
