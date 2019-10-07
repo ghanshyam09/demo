@@ -65,6 +65,7 @@ public class Feedback extends AppCompatActivity {
 //                ref_name.setValue(name);
 //                Firebase ref_email=ref_id.child("email_id");
 //                ref_email.setValue(email);
+
         Intent intent=new Intent(Feedback.this,FourActivity.class);
         startActivity(intent);
 

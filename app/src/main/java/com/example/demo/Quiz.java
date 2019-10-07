@@ -2,17 +2,21 @@ package com.example.demo;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
 import android.view.View;
+import android.view.animation.Animation;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.example.demo.module.Questions;
 import com.firebase.client.Firebase;
@@ -34,6 +38,7 @@ public class Quiz extends AppCompatActivity
     private Button b1,b2,b3,b4;
     private TextView question,quecount,counter;
    public int total=0;
+   private ConstraintLayout layout;
     public int score=0;
      public int qcounter=10;
     @Override
@@ -47,7 +52,11 @@ public class Quiz extends AppCompatActivity
         b2=(Button)findViewById(R.id.op2);
         b3=(Button)findViewById(R.id.op3);
         b4=(Button)findViewById(R.id.op4);
-
+        layout=findViewById(R.id.animi);
+        AnimationDrawable animation=(AnimationDrawable)layout.getBackground();
+        animation.setEnterFadeDuration(2000);
+        animation.setExitFadeDuration(3000);
+        animation.start();
         question=(TextView)findViewById(R.id.tque);
         quecount=(TextView)findViewById(R.id.qcount);
         counter=(TextView) findViewById(R.id.timer);
@@ -337,8 +346,8 @@ public class Quiz extends AppCompatActivity
 
                 //tv.setText("completed");
 
-              /*  Intent intent = new Intent(Quiz.this, Resultactivity.class);
-                //intent.putExtra("Total Questions",String.valueOf(total));
+                Intent intent = new Intent(Quiz.this, Feedback.class);
+               /* //intent.putExtra("Total Questions",String.valueOf(total));
                 intent.putExtra("Score", String.valueOf(score));
                 startActivity(intent);*/
 
@@ -348,29 +357,29 @@ public class Quiz extends AppCompatActivity
                 finish();*/
             }
         }.start();
-        new CountDownTimer(seconds*1000+1000,1000) {
-            @Override
-            public void onTick(long millisUntilFinished) {
-
-            }
-
-            @Override
-            public void onFinish() {
-                if (total > 10) {
-                    //tv.setText("completed");
-                    //assist.cancel();
-                    mCountDownTimer.cancel();
-                    //finish();
-                }
-                else
-                {
-                    Intent intent = new Intent(Quiz.this, Resultactivity.class);
-                    //intent.putExtra("Total Questions",String.valueOf(total));
-                    intent.putExtra("Score", String.valueOf(score));
-                    startActivity(intent);
-                }
-            }
-        };
+//        new CountDownTimer(seconds*1000+1000,1000) {
+//            @Override
+//            public void onTick(long millisUntilFinished) {
+//
+//            }
+//
+//            @Override
+//            public void onFinish() {
+//                if (total > 10) {
+//                    //tv.setText("completed");
+//                    //assist.cancel();
+//                    mCountDownTimer.cancel();
+//                    //finish();
+//                }
+//                else
+//                {
+//                    Intent intent = new Intent(Quiz.this, Resultactivity.class);
+//                    //intent.putExtra("Total Questions",String.valueOf(total));
+//                    intent.putExtra("Score", String.valueOf(score));
+//                    startActivity(intent);
+//                }
+//            }
+//        };
 
     }
 

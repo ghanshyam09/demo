@@ -99,19 +99,25 @@ public class FourActivity extends AppCompatActivity
             startActivity(intent);
             Toast.makeText(FourActivity.this,"Successful",Toast.LENGTH_SHORT).show();
 
-        } else if (id == R.id.nav_gallery) {
+        } else if (id == R.id.feedback) {
 
         } else if (id == R.id.Logout) {
             fire.getInstance().signOut();
             finish();
             Intent intent=new Intent(FourActivity.this,SecondActivity.class);
             startActivity(intent);
-            finish();
+
         } else if (id == R.id.settings) {
 
         } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
+            Intent intent=new Intent((Intent.ACTION_SEND));
+            intent.setType("text/plain");
+            String body="your body here";
+            String sub="your subject here";
+            intent.putExtra(intent.EXTRA_TEXT,body);
+            intent.putExtra(intent.EXTRA_TEXT,sub);
+            startActivity(Intent.createChooser(intent,"Share using"));
+        } else if (id == R.id.About) {
 
         }
 
