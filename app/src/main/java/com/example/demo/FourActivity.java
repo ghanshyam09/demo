@@ -103,9 +103,9 @@ public class FourActivity extends AppCompatActivity
 
         } else if (id == R.id.Logout) {
             fire.getInstance().signOut();
-            finish();
             Intent intent=new Intent(FourActivity.this,SecondActivity.class);
             startActivity(intent);
+            finish();
 
         } else if (id == R.id.settings) {
 
