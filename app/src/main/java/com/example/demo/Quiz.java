@@ -7,11 +7,8 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
 import android.view.View;
-import android.view.animation.Animation;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -114,7 +111,7 @@ public class Quiz extends AppCompatActivity
                         public void onClick(View v) {
                             if(b1.getText().toString().equals(questions.getAnswer()))
                             {
-                                Toast.makeText(Quiz.this,"Correct answer",Toast.LENGTH_SHORT).show();
+                                //Toast.makeText(Quiz.this,"Correct answer",Toast.LENGTH_SHORT).show();
                                 score++;
                                 b1.setBackgroundColor(Color.GREEN);
                                 Handler handler=new Handler();
@@ -131,7 +128,7 @@ public class Quiz extends AppCompatActivity
                             }
                             else
                             {
-                                Toast.makeText(Quiz.this,"wrong answer",Toast.LENGTH_SHORT).show();
+                                //Toast.makeText(Quiz.this,"wrong answer",Toast.LENGTH_SHORT).show();
                                b1.setBackgroundColor(Color.RED);
                                if(b2.getText().toString().equals(questions.getAnswer()))
                                {
@@ -164,7 +161,7 @@ public class Quiz extends AppCompatActivity
                         public void onClick(View v) {
                             if(b2.getText().toString().equals(questions.getAnswer()))
                             {
-                                Toast.makeText(Quiz.this,"Correct answer",Toast.LENGTH_SHORT).show();
+                                //Toast.makeText(Quiz.this,"Correct answer",Toast.LENGTH_SHORT).show();
                                 score++;
                                 b2.setBackgroundColor(Color.GREEN);
                                 Handler handler=new Handler();
@@ -182,7 +179,7 @@ public class Quiz extends AppCompatActivity
                             }
                             else
                             {
-                                Toast.makeText(Quiz.this,"wrong answer",Toast.LENGTH_SHORT).show();
+                                //Toast.makeText(Quiz.this,"wrong answer",Toast.LENGTH_SHORT).show();
                                 b2.setBackgroundColor(Color.RED);
                                 if(b1.getText().toString().equals(questions.getAnswer()))
                                 {
@@ -215,7 +212,7 @@ public class Quiz extends AppCompatActivity
                         public void onClick(View v) {
                             if(b3.getText().toString().equals(questions.getAnswer()))
                             {
-                                Toast.makeText(Quiz.this,"Correct answer",Toast.LENGTH_SHORT).show();
+                                //Toast.makeText(Quiz.this,"Correct answer",Toast.LENGTH_SHORT).show();
                                 score++;
                                 b3.setBackgroundColor(Color.GREEN);
                                 Handler handler=new Handler();
@@ -233,7 +230,7 @@ public class Quiz extends AppCompatActivity
                             }
                             else
                             {
-                                Toast.makeText(Quiz.this,"wrong answer",Toast.LENGTH_SHORT).show();
+                                //Toast.makeText(Quiz.this,"wrong answer",Toast.LENGTH_SHORT).show();
                                 b3.setBackgroundColor(Color.RED);
                                 if(b1.getText().toString().equals(questions.getAnswer()))
                                 {
@@ -266,7 +263,7 @@ public class Quiz extends AppCompatActivity
                         public void onClick(View v) {
                             if(b4.getText().toString().equals(questions.getAnswer()))
                             {
-                                Toast.makeText(Quiz.this,"Correct answer",Toast.LENGTH_SHORT).show();
+                                //Toast.makeText(Quiz.this,"Correct answer",Toast.LENGTH_SHORT).show();
                                 score++;
                                 b4.setBackgroundColor(Color.GREEN);
                                 Handler handler=new Handler();
@@ -284,7 +281,7 @@ public class Quiz extends AppCompatActivity
                             }
                             else
                             {
-                                Toast.makeText(Quiz.this,"wrong answer",Toast.LENGTH_SHORT).show();
+                                //Toast.makeText(Quiz.this,"wrong answer",Toast.LENGTH_SHORT).show();
                                 b4.setBackgroundColor(Color.RED);
                                 if(b1.getText().toString().equals(questions.getAnswer()))
                                 {
@@ -342,19 +339,13 @@ public class Quiz extends AppCompatActivity
 
             @Override
             public void onFinish() {
-
-
-                //tv.setText("completed");
-
-                Intent intent = new Intent(Quiz.this, Feedback.class);
-               /* //intent.putExtra("Total Questions",String.valueOf(total));
-                intent.putExtra("Score", String.valueOf(score));
-                startActivity(intent);*/
-
-
-                /*Intent intent = new Intent(Quiz.this, Feedback.class);
-                startActivity(intent);
-                finish();*/
+                if(total<10) {
+                    Intent intent = new Intent(Quiz.this, Resultactivity.class);
+                    //intent.putExtra("Total Questions",String.valueOf(total));
+                    intent.putExtra("Score", String.valueOf(score));
+                    startActivity(intent);
+                    finish();
+                }
             }
         }.start();
         new CountDownTimer(seconds*1000+1000,1000) {
@@ -366,18 +357,18 @@ public class Quiz extends AppCompatActivity
             @Override
             public void onFinish() {
                 if (total > 10) {
-                    //tv.setText("completed");
+                    tv.setText("completed");
                     //assist.cancel();
                     mCountDownTimer.cancel();
                     //finish();
                 }
-                else
+               /* else
                 {
                     Intent intent = new Intent(Quiz.this, Resultactivity.class);
                     //intent.putExtra("Total Questions",String.valueOf(total));
                     intent.putExtra("Score", String.valueOf(score));
                     startActivity(intent);
-                }
+                }*/
             }
         };
 
