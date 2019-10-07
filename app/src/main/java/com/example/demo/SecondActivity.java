@@ -68,7 +68,9 @@ public class SecondActivity extends AppCompatActivity {
                                             startActivity(new Intent(SecondActivity.this, FourActivity.class));
                                             email.setText("");
                                             password.setText("");
+                                            finish();
                                             Toast.makeText(SecondActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
+
                                         }
                                         else{
                                             progress.cancel();

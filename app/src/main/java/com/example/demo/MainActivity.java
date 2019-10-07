@@ -18,6 +18,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class MainActivity extends AppCompatActivity {
     private EditText Name,mail;
@@ -26,6 +28,8 @@ public class MainActivity extends AppCompatActivity {
     private Button Signup;
     private FirebaseAuth fire;
     private ProgressDialog progress;
+    private DatabaseReference data;
+
     //ConstraintLayout layout;
     private int cnt=5;
     @Override
@@ -81,6 +85,10 @@ public class MainActivity extends AppCompatActivity {
                 {
                     pasword.setError("Minmum length of password should be 6");
                 }
+                data= FirebaseDatabase.getInstance().getReference().child("Users").child(fire.getCurrentUser().getUid());
+
+                user user=new user(n,e);
+                data.setValue(user);
                 progress.setMessage("Registering");
                 progress.show();
                 fire.createUserWithEmailAndPassword(e, p)
@@ -101,6 +109,7 @@ public class MainActivity extends AppCompatActivity {
                                                 mail.setText("");
                                                 pasword.setText("");
                                                 Name.setText("");
+
                                             }else{
                                                 String error=task.getException().getMessage();
                                                 Toast.makeText(MainActivity.this,"error"+error,Toast.LENGTH_SHORT).show();

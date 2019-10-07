@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.firebase.client.Firebase;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 
 public class Feedback extends AppCompatActivity {
@@ -31,7 +32,7 @@ public class Feedback extends AppCompatActivity {
         feedbackToFirebase=findViewById(R.id.et2);
          send=findViewById(R.id.btn_send);
         Firebase.setAndroidContext(this);
-        ref=new Firebase("https://fir-ba791.firebaseio.com/");
+        //ref=new Firebase("https://fir-ba791.firebaseio.com/");
 
 
 
@@ -42,24 +43,23 @@ public class Feedback extends AppCompatActivity {
 
 
         auth=FirebaseAuth.getInstance();
-      //  data=FirebaseDatabase.getInstance().getReference().child("Users").child(auth.getCurrentUser().getUid());
+       data= FirebaseDatabase.getInstance().getReference().child("Users").child(auth.getCurrentUser().getUid());
       //  FirebaseUser user=auth.getCurrentUser();
         String feed=feedbackToFirebase.getText().toString().trim();
         Float r=rating.getRating();
+        data.child("Feedback").setValue(feed);
+        data.child("Rating").setValue(r);
 
-//        mail=findViewById(R.id.editText3);
-//        Name = findViewById(R.id.etuser);
-//        String name=Name.getText().toString();
-//        String email= mail.getText().toString();
+//
 
-            Firebase user=ref.child("Users");
-
-                Firebase ref_id=user.child(auth.getCurrentUser().getUid());
-
-                Firebase ref_feed=ref_id.child("Feedback");
-                ref_feed.setValue(feed);
-                Firebase ref_rating= ref_id.child("Rating");
-                ref_rating.setValue(r);
+//            Firebase user=ref.child("Users");
+//
+//                Firebase ref_id=user.child(auth.getCurrentUser().getUid());
+//
+//                Firebase ref_feed=ref_id.child("Feedback");
+//                ref_feed.setValue(feed);
+//                Firebase ref_rating= ref_id.child("Rating");
+//                ref_rating.setValue(r);
 //                user usr =new user(name,email);
 //                Firebase ref_name=ref_id.child("username");
 //                ref_name.setValue(name);

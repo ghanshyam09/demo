@@ -7,5 +7,6 @@ public class user {
     public user(String username, String email) {
         this.username = username;
         this.email = email;
+
     }
 }
