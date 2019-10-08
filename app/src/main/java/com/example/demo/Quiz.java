@@ -36,6 +36,7 @@ public class Quiz extends AppCompatActivity
     private TextView question,quecount,counter;
    public int total=0;
    private ConstraintLayout layout;
+
     public int score=0;
      public int qcounter=10;
     @Override

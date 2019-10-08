@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseAuth fire;
     private ProgressDialog progress;
     private DatabaseReference data;
-
+    public user user;
     //ConstraintLayout layout;
     private int cnt=5;
     @Override
@@ -86,9 +86,10 @@ public class MainActivity extends AppCompatActivity {
                     pasword.setError("Minmum length of password should be 6");
                 }
                 data= FirebaseDatabase.getInstance().getReference().child("Users").child(fire.getCurrentUser().getUid());
-
-                user user=new user(n,e);
+               // FirebaseUser.setDisplayName();
+                 user=new user(n,e);
                 data.setValue(user);
+                user.setUsername(n);
                 progress.setMessage("Registering");
                 progress.show();
                 fire.createUserWithEmailAndPassword(e, p)
