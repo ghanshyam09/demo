@@ -1,5 +1,6 @@
 package com.example.demo;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ApplicationInfo;
@@ -160,11 +161,10 @@ public class FourActivity extends AppCompatActivity
         } else if (id == R.id.Logout) {
             fire.getInstance().signOut();
             finish();
-//            SharedPreferences prefer= getSharedPreferences("demo",MODE_PRIVATE);
-//            SharedPreferences.Editor edit=prefer.edit();
-//            edit.putString("login_Status","off");
-//            edit.commit();
-            //this.finish();
+            SharedPreferences prefer= getApplicationContext().getSharedPreferences("data", Context.MODE_PRIVATE);
+            SharedPreferences.Editor edit=prefer.edit();
+            edit.putString("login_Status","off");
+            edit.commit();
 
         } else if (id == R.id.settings) {
 

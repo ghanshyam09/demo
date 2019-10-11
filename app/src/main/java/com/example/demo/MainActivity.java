@@ -111,7 +111,6 @@ public class MainActivity extends AppCompatActivity {
                                         @Override
                                         public void onComplete(@NonNull Task<Void> task) {
                                             if (task.isSuccessful()) {
-                                               // save();
                                                 data= FirebaseDatabase.getInstance().getReference().child("Users").child(fire.getCurrentUser().getUid());
                                                 Toast.makeText(MainActivity.this, "Please check your mail", Toast.LENGTH_SHORT).show();
                                                 user user=new user(n,e);
@@ -138,14 +137,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
-        public void save()
-        {
-//             SharedPreferences prefer= getSharedPreferences("data",MODE_PRIVATE);
-//        SharedPreferences.Editor edit=prefer.edit();
-//        edit.putString("Username",Name.getText().toString());
-//        edit.apply();
-        Toast.makeText(this,"data saved",Toast.LENGTH_LONG).show();
-        }
+
 
 
 

@@ -30,7 +30,6 @@ public class SecondActivity extends AppCompatActivity {
     private Button log;
     private FirebaseAuth fire;
     private  Context ctx;
-    private FirebaseAuth.AuthStateListener authStateListener;
 
     private ProgressDialog progress;
     public DatabaseReference data;
@@ -45,7 +44,6 @@ public class SecondActivity extends AppCompatActivity {
         log=findViewById(R.id.button2);
         reset=findViewById(R.id.textView7);
 
-        //final String name=getIntent().getStringExtra("userName");
 
         fire=fire.getInstance();
          progress=new ProgressDialog(this);
@@ -55,12 +53,7 @@ public class SecondActivity extends AppCompatActivity {
                 startActivity(new Intent(SecondActivity.this,ThirdActivity.class) );
             }
         });
-        authStateListener=new FirebaseAuth.AuthStateListener() {
-            @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                checkifLogin();
-            }
-        };
+
 
         log.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,14 +79,14 @@ public class SecondActivity extends AppCompatActivity {
                                     if (task.isSuccessful()) {
                                         progress.cancel();
                                         if(fire.getCurrentUser().isEmailVerified()) {
-                                            SharedPreferences prefer= getSharedPreferences("data",MODE_PRIVATE);
-                                             String name=prefer.getString("data","");
-
+                                            SharedPreferences prefer= getApplicationContext().getSharedPreferences("data",Context.MODE_PRIVATE);
+                                            SharedPreferences.Editor edit=prefer.edit();
+                                            edit.putString("login_Status","on");
+                                            edit.commit();
                                             startActivity(new Intent(SecondActivity.this, FourActivity.class));
                                             email.setText("");
                                             password.setText("");
                                             finish();
-                                           // Store();
                                             Toast.makeText(SecondActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
 
                                         }
@@ -106,7 +99,7 @@ public class SecondActivity extends AppCompatActivity {
                                         Toast.makeText(SecondActivity.this,"Please check your email and password ",Toast.LENGTH_SHORT).show();
                                     }
 
-                                    // ...
+
                                 }
                             });
             }
@@ -114,25 +107,5 @@ public class SecondActivity extends AppCompatActivity {
         });
 
     }
-    @Override
-    protected  void onStart(){
-        super.onStart();
-        fire.addAuthStateListener(authStateListener);
-    }
-    void checkifLogin() {
-        FirebaseUser user = fire.getCurrentUser();
-        if (user != null) {
-            Intent intent = new Intent(this, FourActivity.class);
-        } else {
-            Toast.makeText(this, "Login to continue", Toast.LENGTH_SHORT).show();
-        }
-    }
 
-
-//    private void Store() {
-//        SharedPreferences prefer= ctx.getSharedPreferences("demo",MODE_PRIVATE);
-//        SharedPreferences.Editor edit=prefer.edit();
-//        edit.putString("login_Status","on");
-//        edit.commit();
-//    }
 }
