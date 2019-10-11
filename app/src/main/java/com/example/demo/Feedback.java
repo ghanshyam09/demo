@@ -1,11 +1,13 @@
 package com.example.demo;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RatingBar;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -33,11 +35,7 @@ public class Feedback extends AppCompatActivity {
          send=findViewById(R.id.btn_send);
         Firebase.setAndroidContext(this);
         //ref=new Firebase("https://fir-ba791.firebaseio.com/");
-
-
-
     }
-
 
     public void sendtofirebase(View view) {
 
@@ -49,6 +47,7 @@ public class Feedback extends AppCompatActivity {
         Float r=rating.getRating();
         data.child("Feedback").setValue(feed);
         data.child("Rating").setValue(r);
+
 
 //
 
@@ -67,6 +66,7 @@ public class Feedback extends AppCompatActivity {
 //                ref_email.setValue(email);
 
         Intent intent=new Intent(Feedback.this,FourActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
 
         finish();
@@ -74,8 +74,14 @@ public class Feedback extends AppCompatActivity {
 
 
 
-
-
-
+    @Override
+    public void onBackPressed() {
+       // progress.show();
+       // progress.onBackPressed();
+       // Toast.makeText(this,"wait",Toast.LENGTH_SHORT).show();
     }
+
+
+
+}
 

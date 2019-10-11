@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -34,5 +35,11 @@ public class Resultactivity extends AppCompatActivity {
             }
         },3000);
 
+
+
+    }
+    @Override
+    public void onBackPressed() {
+        Toast.makeText(this,"wait",Toast.LENGTH_SHORT).show();
     }
 }

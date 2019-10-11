@@ -1,6 +1,7 @@
 package com.example.demo;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.ApplicationInfo;
 import android.net.Uri;
 import android.os.Bundle;
@@ -129,7 +130,13 @@ public class FourActivity extends AppCompatActivity
 //
 //        //noinspection SimplifiableIfStatement
 //        if (id == R.id.action_settings) {
-//            return true;
+//           // return true;
+//            fire.getInstance().signOut();
+//           /// finish();
+//            Intent intent = new Intent(FourActivity.this, SecondActivity.class);
+//            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//            startActivity(intent);
 //        }
 //
 //        return super.onOptionsItemSelected(item);
@@ -144,17 +151,19 @@ public class FourActivity extends AppCompatActivity
         if (id == R.id.home) {
             // Handle the camera action
             Intent intent = new Intent(this, FourActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
-            Toast.makeText(FourActivity.this, "Successful", Toast.LENGTH_SHORT).show();
+            Toast.makeText(FourActivity.this, "", Toast.LENGTH_SHORT).show();
 
         } else if (id == R.id.feedback) {
 
         } else if (id == R.id.Logout) {
             fire.getInstance().signOut();
             finish();
-            Intent intent = new Intent(FourActivity.this, SecondActivity.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(intent);
+//            SharedPreferences prefer= getSharedPreferences("demo",MODE_PRIVATE);
+//            SharedPreferences.Editor edit=prefer.edit();
+//            edit.putString("login_Status","off");
+//            edit.commit();
             //this.finish();
 
         } else if (id == R.id.settings) {

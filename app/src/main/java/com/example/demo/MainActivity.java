@@ -2,6 +2,7 @@ package com.example.demo;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -18,8 +19,11 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class MainActivity extends AppCompatActivity {
     private EditText Name,mail;
@@ -28,10 +32,9 @@ public class MainActivity extends AppCompatActivity {
     private Button Signup;
     private FirebaseAuth fire;
     private ProgressDialog progress;
-    private DatabaseReference data;
-    public user user;
-    //ConstraintLayout layout;
-    private int cnt=5;
+    public DatabaseReference data;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,76 +47,79 @@ public class MainActivity extends AppCompatActivity {
         Name = findViewById(R.id.etuser);
         pasword = findViewById(R.id.etpassword);
         Info = findViewById(R.id.textView4);
-        mail=findViewById(R.id.editText3);
-        Signup =findViewById(R.id.button);
-         fire= fire.getInstance();
-              progress=new ProgressDialog(this);
-        //Info.setText("No. of attempts remaining 5");
+        mail = findViewById(R.id.editText3);
+        Signup = findViewById(R.id.button);
+        fire = FirebaseAuth.getInstance();
+
+
+        progress = new ProgressDialog(this);
+
+
         Info.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                 Intent intent=new Intent(MainActivity.this,SecondActivity.class);
+                Intent intent = new Intent(MainActivity.this, SecondActivity.class);
                 startActivity(intent);
             }
         });
+
+        SharedPreferences prefer = getSharedPreferences("demo", MODE_PRIVATE);
+        String check = prefer.getString("login_Status", "off");
+        if (check.equals("on")) {
+            startActivity(new Intent(this, FourActivity.class));
+
+        }
         Signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               // Intent intent=new Intent(MainActivity.this,SecondActivity.class);
-                //startActivity(intent);
-              // validate(username.getText().toString(),password.getText().toString());
-                String n=Name.getText().toString().trim();
-                String p=pasword.getText().toString().trim();
-                String e=mail.getText().toString().trim();
-               // info.setText("No. of attempts remaining 5");
-                if(TextUtils.isEmpty(n)){
+
+                final String n = Name.getText().toString().trim();
+                final String p = pasword.getText().toString().trim();
+                final String e = mail.getText().toString().trim();
+                if (TextUtils.isEmpty(n)) {
                     Name.requestFocus();
-                    Toast.makeText(MainActivity.this,"Please enter the name",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, "Please enter the name", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                if(TextUtils.isEmpty(e)){
+                if (TextUtils.isEmpty(e)) {
                     mail.requestFocus();
-                    Toast.makeText(MainActivity.this,"Please enter the Email",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, "Please enter the Email", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                if(TextUtils.isEmpty(p)){
+                if (TextUtils.isEmpty(p)) {
                     pasword.requestFocus();
-                    Toast.makeText(MainActivity.this,"Please enter the Password",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, "Please enter the Password", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                if(pasword.length()<6)
-                {
+                if (pasword.length() < 6) {
                     pasword.setError("Minmum length of password should be 6");
                 }
-                data= FirebaseDatabase.getInstance().getReference().child("Users").child(fire.getCurrentUser().getUid());
-               // FirebaseUser.setDisplayName();
-                 user=new user(n,e);
-                data.setValue(user);
-                user.setUsername(n);
+
+
                 progress.setMessage("Registering");
                 progress.show();
                 fire.createUserWithEmailAndPassword(e, p)
-                        .addOnCompleteListener( new OnCompleteListener<AuthResult>() {
+                        .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if (task.isSuccessful()) {
                                     progress.cancel();
-                                    Toast.makeText(MainActivity.this,"Successful",Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(MainActivity.this, "Successful", Toast.LENGTH_SHORT).show();
                                     progress.cancel();
-                                    FirebaseUser user=fire.getCurrentUser();
+                                    FirebaseUser user = fire.getCurrentUser();
                                     user.sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
                                         @Override
                                         public void onComplete(@NonNull Task<Void> task) {
-                                            if(task.isSuccessful()){
-                                               //  senduser();
-                                                Toast.makeText(MainActivity.this,"Please check your mail",Toast.LENGTH_SHORT).show();
-                                                mail.setText("");
-                                                pasword.setText("");
-                                                Name.setText("");
+                                            if (task.isSuccessful()) {
+                                               // save();
+                                                data= FirebaseDatabase.getInstance().getReference().child("Users").child(fire.getCurrentUser().getUid());
+                                                Toast.makeText(MainActivity.this, "Please check your mail", Toast.LENGTH_SHORT).show();
+                                                user user=new user(n,e);
+                                                data.setValue(user);
 
-                                            }else{
-                                                String error=task.getException().getMessage();
-                                                Toast.makeText(MainActivity.this,"error"+error,Toast.LENGTH_SHORT).show();
+                                            } else {
+                                                String error = task.getException().getMessage();
+                                                Toast.makeText(MainActivity.this, "error" + error, Toast.LENGTH_SHORT).show();
                                             }
                                         }
                                     });
@@ -121,23 +127,28 @@ public class MainActivity extends AppCompatActivity {
                                 } else {
                                     //task.getException();
                                     progress.cancel();
-                                    Toast.makeText(MainActivity.this,"check the email and password",Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(MainActivity.this, "check the email and password", Toast.LENGTH_SHORT).show();
                                 }
 
-                                // ...
+
                             }
                         });
-                
+
             }
         });
-//        private void senduser()
-//        {
-//            user usr =new user(Name,mail);
-//                Firebase ref_name=ref_id.child("username");
-//                ref_name.setValue(name);
-//                Firebase ref_email=ref_id.child("email_id");
-//                ref_email.setValue(email);
-        //}
+
     }
+        public void save()
+        {
+//             SharedPreferences prefer= getSharedPreferences("data",MODE_PRIVATE);
+//        SharedPreferences.Editor edit=prefer.edit();
+//        edit.putString("Username",Name.getText().toString());
+//        edit.apply();
+        Toast.makeText(this,"data saved",Toast.LENGTH_LONG).show();
+        }
+
+
+
+
 
 }

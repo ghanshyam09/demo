@@ -18,6 +18,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import com.example.demo.module.Questions;
 import com.firebase.client.Firebase;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -29,9 +30,9 @@ import java.util.Random;
 public class Quiz extends AppCompatActivity
 {
 
-    DatabaseReference reference;
-    private Firebase ref;
-    private FirebaseAuth auth;
+   private DatabaseReference reference;
+    private DatabaseReference ref;
+    public FirebaseAuth auth;
     private Button b1,b2,b3,b4;
     private TextView question,quecount,counter;
    public int total=0;
@@ -44,7 +45,11 @@ public class Quiz extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz);
         Firebase.setAndroidContext(this);
-        ref=new Firebase("https://fir-ba791.firebaseio.com/Users");
+
+        auth=auth.getInstance();
+        FirebaseUser us=auth.getCurrentUser();
+        ref=FirebaseDatabase.getInstance().getReference().child("Users").child(us.getUid());
+       // ref=new Firebase("https://fir-ba791.firebaseio.com/Users");
 
         b1=(Button)findViewById(R.id.op1);
         b2=(Button)findViewById(R.id.op2);
@@ -320,11 +325,11 @@ public class Quiz extends AppCompatActivity
                 }
             });
         }
-        auth=FirebaseAuth.getInstance();
-        Firebase ref_id=ref.child(auth.getCurrentUser().getUid());
-        Firebase ref_score=ref_id.child("Score");
-        ref_score.setValue(score);
-
+//        auth=FirebaseAuth.getInstance();
+//        Firebase ref_id=ref.child(auth.getCurrentUser().getUid());
+//        Firebase ref_score=ref_id.child("Score");
+//        ref_score.setValue(score);
+        ref.child("Score").setValue(score);
     }
 
     public void reverseTimer(int seconds ,final TextView tv ) {
