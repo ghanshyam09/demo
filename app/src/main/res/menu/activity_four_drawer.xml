@@ -9,9 +9,9 @@
             android:icon="@drawable/ic_home_black_24dp"
             android:title="@string/menu_home" />
         <item
-            android:id="@+id/feedback"
+            android:id="@+id/Profile"
             android:icon="@drawable/ic_menu_gallery"
-            android:title="feedback" />
+            android:title="Profile" />
         <item
             android:id="@+id/settings"
             android:icon="@drawable/ic_menu_manage"

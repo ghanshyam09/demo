@@ -46,7 +46,7 @@ public class Quiz extends AppCompatActivity
         setContentView(R.layout.activity_quiz);
         Firebase.setAndroidContext(this);
 
-        auth=auth.getInstance();
+        auth=FirebaseAuth.getInstance();
         FirebaseUser us=auth.getCurrentUser();
         ref=FirebaseDatabase.getInstance().getReference().child("Users").child(us.getUid());
        // ref=new Firebase("https://fir-ba791.firebaseio.com/Users");

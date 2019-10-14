@@ -11,9 +11,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -39,39 +41,51 @@ public class FourActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
      FirebaseAuth fire;
     private Button Next;
-    private DatabaseReference reference;
+    ImageView profilepic;
+    private DatabaseReference reference,ref,img;
    private TextView text;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_four);
-         user user1=new user();
-        // user1=user;
-//        EditText Name = findViewById(R.id.etuser);
-//        EditText mail=findViewById(R.id.editText3);
-       // user user=new user(Name.getText().toString(),mail.getText().toString());
+
         NavigationView navigation = findViewById(R.id.nav_view);
         View headerView= navigation.getHeaderView(0);
         text= headerView.findViewById(R.id.ettext);
-       text.setText(fire.getInstance().getCurrentUser().getEmail());
-       // reference= FirebaseDatabase.getInstance().getReference().child("Users").child(fire.getInstance().getCurrentUser().getUid());
-//        NavigationView navigation = findViewById(R.id.nav_view);
-//        View headerView= navigation.getHeaderView(0);
-//        text= headerView.findViewById(R.id.ettext);
-//        reference.child("username").addListenerForSingleValueEvent(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//
-//                String name = dataSnapshot.getValue(String.class);
-//                text.setText(name);
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError databaseError) {
-//
-//            }
-//        });
+        profilepic=headerView.findViewById(R.id.imageView);
+        img=FirebaseDatabase.getInstance().getReference().child("Users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("image");
+        img.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+               String uri=dataSnapshot.getValue(String.class);
+                Glide.with(getApplicationContext()).load(uri).into(profilepic);
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+       ref=FirebaseDatabase.getInstance().getReference().child("Users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("username");
+
+      ref.addValueEventListener(new ValueEventListener() {
+          @Override
+          public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+               String  name1=dataSnapshot.getValue().toString();
+              text.setText(name1);
+          }
+
+          @Override
+          public void onCancelled(@NonNull DatabaseError databaseError) {
+
+          }
+      });
+
+
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 //      // EditText Name = findViewById(R.id.etuser);
@@ -156,10 +170,13 @@ public class FourActivity extends AppCompatActivity
             startActivity(intent);
             Toast.makeText(FourActivity.this, "", Toast.LENGTH_SHORT).show();
 
-        } else if (id == R.id.feedback) {
+        } else if (id == R.id.Profile) {
+            Intent intent=new Intent(this,Profile.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
 
         } else if (id == R.id.Logout) {
-            fire.getInstance().signOut();
+            FirebaseAuth.getInstance().signOut();
             finish();
             SharedPreferences prefer= getApplicationContext().getSharedPreferences("data", Context.MODE_PRIVATE);
             SharedPreferences.Editor edit=prefer.edit();
