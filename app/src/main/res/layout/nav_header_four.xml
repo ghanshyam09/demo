@@ -27,7 +27,7 @@
         android:text="Hello"
         android:textColor="@color/black"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:textStyle="bold" />
+        android:textStyle="bold|italic" />
 
     <TextView
         android:id="@+id/ettext"
