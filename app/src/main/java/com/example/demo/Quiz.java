@@ -30,7 +30,7 @@ import java.util.Random;
 public class Quiz extends AppCompatActivity
 {
 
-   private DatabaseReference reference;
+    private DatabaseReference reference;
     private DatabaseReference ref;
     public FirebaseAuth auth;
     private Button b1,b2,b3,b4;
@@ -40,6 +40,9 @@ public class Quiz extends AppCompatActivity
 
     public int score=0;
      public int qcounter=10;
+
+
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,54 +51,44 @@ public class Quiz extends AppCompatActivity
 
         auth=FirebaseAuth.getInstance();
         FirebaseUser us=auth.getCurrentUser();
-        ref=FirebaseDatabase.getInstance().getReference().child("Users").child(us.getUid());
-       // ref=new Firebase("https://fir-ba791.firebaseio.com/Users");
+        ref=FirebaseDatabase.getInstance().getReference().child("Users").child(us.getUid()).child("Score");
 
         b1=(Button)findViewById(R.id.op1);
         b2=(Button)findViewById(R.id.op2);
         b3=(Button)findViewById(R.id.op3);
         b4=(Button)findViewById(R.id.op4);
+
         layout=findViewById(R.id.animi);
+
         AnimationDrawable animation=(AnimationDrawable)layout.getBackground();
         animation.setEnterFadeDuration(2000);
         animation.setExitFadeDuration(3000);
         animation.start();
+
         question=(TextView)findViewById(R.id.tque);
         quecount=(TextView)findViewById(R.id.qcount);
         counter=(TextView) findViewById(R.id.timer);
 
-        updatequestion();
-        reverseTimer(30,counter);
+            updatequestion();
+            reverseTimer(10,counter);
 
     }
     public void updatequestion()
     {
-       int random= new  Random().nextInt(9)+1;
+       int random= new  Random().nextInt(19)+1;
         total++;
-
+        Intent i=getIntent();
+        String s=i.getStringExtra("sub");
         if(total>10)
         {
-            //tv.setText("completed");
-            //total--;
-              //mCountDownTimer.cancel()
-
                     Intent intent = new Intent(Quiz.this,Resultactivity.class);
-                    //intent.putExtra("Total Questions",String.valueOf(total));
                     intent.putExtra("Score",String.valueOf(score));
                     startActivity(intent);
                     finish();
-
-            /*Intent intent = new Intent(Quiz.this,Feedback.class);
-                    intent.putExtra("Total Questions",String.valueOf(total));
-                    intent.putExtra("Score",String.valueOf(score));
-                    startActivity(intent);
-                     finish();*/
-
-
         }
         else
         {
-            reference= FirebaseDatabase.getInstance().getReference().child("Question").child(String.valueOf(random));
+            reference=FirebaseDatabase.getInstance().getReference().child("Question").child(s).child(String.valueOf(random));
             reference.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -117,7 +110,6 @@ public class Quiz extends AppCompatActivity
                         public void onClick(View v) {
                             if(b1.getText().toString().equals(questions.getAnswer()))
                             {
-                                //Toast.makeText(Quiz.this,"Correct answer",Toast.LENGTH_SHORT).show();
                                 score++;
                                 b1.setBackgroundColor(Color.GREEN);
                                 Handler handler=new Handler();
@@ -134,7 +126,7 @@ public class Quiz extends AppCompatActivity
                             }
                             else
                             {
-                                //Toast.makeText(Quiz.this,"wrong answer",Toast.LENGTH_SHORT).show();
+
                                b1.setBackgroundColor(Color.RED);
                                if(b2.getText().toString().equals(questions.getAnswer()))
                                {
@@ -167,7 +159,6 @@ public class Quiz extends AppCompatActivity
                         public void onClick(View v) {
                             if(b2.getText().toString().equals(questions.getAnswer()))
                             {
-                                //Toast.makeText(Quiz.this,"Correct answer",Toast.LENGTH_SHORT).show();
                                 score++;
                                 b2.setBackgroundColor(Color.GREEN);
                                 Handler handler=new Handler();
@@ -185,7 +176,6 @@ public class Quiz extends AppCompatActivity
                             }
                             else
                             {
-                                //Toast.makeText(Quiz.this,"wrong answer",Toast.LENGTH_SHORT).show();
                                 b2.setBackgroundColor(Color.RED);
                                 if(b1.getText().toString().equals(questions.getAnswer()))
                                 {
@@ -314,8 +304,7 @@ public class Quiz extends AppCompatActivity
                                 },500);
                             }
                         }
-                    })/**/;
-                // total++;
+                    });
                  quecount.setText("Questions: "+total+"/"+qcounter);
                 }
 
@@ -325,16 +314,13 @@ public class Quiz extends AppCompatActivity
                 }
             });
         }
-//        auth=FirebaseAuth.getInstance();
-//        Firebase ref_id=ref.child(auth.getCurrentUser().getUid());
-//        Firebase ref_score=ref_id.child("Score");
-//        ref_score.setValue(score);
-        ref.child("Score").setValue(score);
+
+        ref.child(s).setValue(score);
     }
 
     public void reverseTimer(int seconds ,final TextView tv ) {
-        final CountDownTimer mCountDownTimer=new CountDownTimer(seconds * 1000 + 1000, 1000) {
-
+        final CountDownTimer mCountDownTimer=new CountDownTimer(seconds * 10000, 1000) {
+           @Override
             public void onTick(long millisUntilFinished) {
                 int seconds = (int) (millisUntilFinished / 1000);
                 int minutes = seconds / 60;
@@ -345,9 +331,8 @@ public class Quiz extends AppCompatActivity
 
             @Override
             public void onFinish() {
-                if(total<10) {
+                if(total < 10) {
                     Intent intent = new Intent(Quiz.this, Resultactivity.class);
-                    //intent.putExtra("Total Questions",String.valueOf(total));
                     intent.putExtra("Score", String.valueOf(score));
                     startActivity(intent);
                     finish();
@@ -363,18 +348,10 @@ public class Quiz extends AppCompatActivity
             @Override
             public void onFinish() {
                 if (total > 10) {
-                    tv.setText("completed");
-                    //assist.cancel();
                     mCountDownTimer.cancel();
-                    //finish();
+
                 }
-               /* else
-                {
-                    Intent intent = new Intent(Quiz.this, Resultactivity.class);
-                    //intent.putExtra("Total Questions",String.valueOf(total));
-                    intent.putExtra("Score", String.valueOf(score));
-                    startActivity(intent);
-                }*/
+
             }
         };
 

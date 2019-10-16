@@ -19,16 +19,13 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 public class MainActivity extends AppCompatActivity {
     private EditText Name,mail;
     private EditText pasword;
-    private TextView Info;
+    private TextView login;
     private Button Signup;
     private FirebaseAuth fire;
     private ProgressDialog progress;
@@ -46,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
 //        animationDrawable.start();
         Name = findViewById(R.id.etuser);
         pasword = findViewById(R.id.etpassword);
-        Info = findViewById(R.id.textView4);
+        login = findViewById(R.id.textView4);
         mail = findViewById(R.id.editText3);
         Signup = findViewById(R.id.button);
         fire = FirebaseAuth.getInstance();
@@ -55,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
         progress = new ProgressDialog(this);
 
 
-        Info.setOnClickListener(new View.OnClickListener() {
+        login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, SecondActivity.class);
@@ -63,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        SharedPreferences prefer = getSharedPreferences("demo", MODE_PRIVATE);
+        SharedPreferences prefer = getSharedPreferences("data", MODE_PRIVATE);
         String check = prefer.getString("login_Status", "off");
         if (check.equals("on")) {
             startActivity(new Intent(this, FourActivity.class));
@@ -124,7 +121,6 @@ public class MainActivity extends AppCompatActivity {
                                     });
 
                                 } else {
-                                    //task.getException();
                                     progress.cancel();
                                     Toast.makeText(MainActivity.this, "check the email and password", Toast.LENGTH_SHORT).show();
                                 }

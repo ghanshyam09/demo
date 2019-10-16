@@ -1,13 +1,11 @@
 package com.example.demo;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RatingBar;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -34,7 +32,7 @@ public class Feedback extends AppCompatActivity {
         feedbackToFirebase=findViewById(R.id.et2);
          send=findViewById(R.id.btn_send);
         Firebase.setAndroidContext(this);
-        //ref=new Firebase("https://fir-ba791.firebaseio.com/");
+
     }
 
     public void sendtofirebase(View view) {

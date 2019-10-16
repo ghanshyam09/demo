@@ -6,60 +6,52 @@ import android.content.SharedPreferences;
 import android.content.pm.ApplicationInfo;
 import android.net.Uri;
 import android.os.Bundle;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
+import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.ValueEventListener;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.cardview.widget.CardView;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
-import com.example.demo.module.Questions;
+import com.bumptech.glide.Glide;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.io.File;
-import java.util.jar.Attributes;
 
 public class FourActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
      FirebaseAuth fire;
-    private Button Next;
-    ImageView profilepic;
-    private DatabaseReference reference,ref,img;
+    private DatabaseReference reference;
    private TextView text;
-
-
+   GridLayout grid;
+    ImageView profilepic;
+DatabaseReference ref,img;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_four);
-
-        NavigationView navigation = findViewById(R.id.nav_view);
+         NavigationView navigation = findViewById(R.id.nav_view);
         View headerView= navigation.getHeaderView(0);
         text= headerView.findViewById(R.id.ettext);
         profilepic=headerView.findViewById(R.id.imageView);
-        img=FirebaseDatabase.getInstance().getReference().child("Users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("image");
+        img= FirebaseDatabase.getInstance().getReference().child("Users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("image");
         img.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-               String uri=dataSnapshot.getValue(String.class);
+                String uri=dataSnapshot.getValue(String.class);
                 Glide.with(getApplicationContext()).load(uri).into(profilepic);
 
             }
@@ -70,34 +62,22 @@ public class FourActivity extends AppCompatActivity
             }
         });
 
-       ref=FirebaseDatabase.getInstance().getReference().child("Users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("username");
+        ref=FirebaseDatabase.getInstance().getReference().child("Users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("username");
 
-      ref.addValueEventListener(new ValueEventListener() {
-          @Override
-          public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-               String  name1=dataSnapshot.getValue().toString();
-              text.setText(name1);
-          }
+        ref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                String  name1=dataSnapshot.getValue().toString();
+                text.setText(name1);
+            }
 
-          @Override
-          public void onCancelled(@NonNull DatabaseError databaseError) {
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
 
-          }
-      });
-
-
+            }
+        });
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-//      // EditText Name = findViewById(R.id.etuser);
-
-        //FloatingActionButton fab = findViewById(R.id.fab);
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
-//            }
-//        });
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -105,16 +85,8 @@ public class FourActivity extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
-        Next=(Button)findViewById(R.id.bn);
-        Next.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View view)
-            {
-                Intent intent=new Intent(FourActivity.this,Quiz.class);
-                startActivity(intent);
-            }
-        });
+        grid=(GridLayout)findViewById(R.id.gridl);
+        nextActivity(grid);
     }
 
     @Override
@@ -126,56 +98,49 @@ public class FourActivity extends AppCompatActivity
             super.onBackPressed();
         }
     }
+     private void nextActivity(GridLayout grid)
+     {
+         for(int i=0;i<grid.getChildCount();i++)
+         {
+             CardView cardView=(CardView)grid.getChildAt(i);
+            final int j=i;
+             cardView.setOnClickListener(new View.OnClickListener() {
+                 @Override
+                 public void onClick(View v) {
+                     if(j==0)
+                     {
+                         Intent intent=new Intent(FourActivity.this,Types.class);
+                         startActivity(intent);
+                     }
+                     else
+                     {
+                         Intent intent=new Intent(FourActivity.this,Quiz.class);
+                          intent.putExtra("sub","Quiz");
+                         startActivity(intent);
+                     }
+                 }
+             });
 
-
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        // Inflate the menu; this adds items to the action bar if it is present.
-//        getMenuInflater().inflate(R.menu.four, menu);
-//        return true;
-//    }
-
-
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        // Handle action bar item clicks here. The action bar will
-//        // automatically handle clicks on the Home/Up button, so long
-//        // as you specify a parent activity in AndroidManifest.xml.
-//        int id = item.getItemId();
-//
-//        //noinspection SimplifiableIfStatement
-//        if (id == R.id.action_settings) {
-//           // return true;
-//            fire.getInstance().signOut();
-//           /// finish();
-//            Intent intent = new Intent(FourActivity.this, SecondActivity.class);
-//            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-//            startActivity(intent);
-//        }
-//
-//        return super.onOptionsItemSelected(item);
-//    }
+         }
+     }
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
         int id = item.getItemId();
 
         if (id == R.id.home) {
-            // Handle the camera action
             Intent intent = new Intent(this, FourActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
-            Toast.makeText(FourActivity.this, "", Toast.LENGTH_SHORT).show();
 
-        } else if (id == R.id.Profile) {
-            Intent intent=new Intent(this,Profile.class);
+        }else if(id== R.id.Profile)
+        {
+            Intent intent=new Intent(FourActivity.this,Profile.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
-
-        } else if (id == R.id.Logout) {
+        }
+        else if (id == R.id.Logout) {
             FirebaseAuth.getInstance().signOut();
             finish();
             SharedPreferences prefer= getApplicationContext().getSharedPreferences("data", Context.MODE_PRIVATE);
@@ -195,10 +160,7 @@ public class FourActivity extends AppCompatActivity
             intent.putExtra(intent.EXTRA_STREAM, Uri.fromFile(new File(apkpath)));
             //intent.putExtra(intent.EXTRA_TEXT, sub);
             startActivity(Intent.createChooser(intent, "Share using"));
-        } else if (id == R.id.About) {
-
         }
-
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;

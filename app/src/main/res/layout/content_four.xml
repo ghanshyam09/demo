@@ -4,134 +4,82 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/instruct"
+    android:background="@drawable/bg2"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".FourActivity"
     tools:showIn="@layout/app_bar_four">
 
-    <Button
-        android:id="@+id/bn"
-        android:layout_width="106dp"
-        android:layout_height="59dp"
-        android:layout_marginBottom="52dp"
-        android:background="@drawable/but_def"
-        android:gravity="center|center_horizontal"
-        android:text="NEXT"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:textColor="#F7F5ED"
-        android:textColorHighlight="#237FC9"
-        android:textColorHint="#2A7FC2"
-        android:textColorLink="#2E78B3"
-        android:textSize="30sp"
-        android:textStyle="bold"
+    <GridLayout
+        android:id="@+id/gridl"
+        android:layout_width="321dp"
+        android:layout_height="315dp"
+
+        android:alignmentMode="alignMargins"
+        android:columnCount="1"
+        android:columnOrderPreserved="false"
+        android:padding="14dp"
+        android:rowCount="2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/ts"
-        android:layout_width="338dp"
-        android:layout_height="41dp"
-        android:layout_marginTop="8dp"
-        android:gravity="center_horizontal"
-        android:text="INSTRUCTION"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:textColor="#EDFFFFFF"
-        android:textSize="30sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintHorizontal_bias="0.6"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.012" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <TextView
-        android:id="@+id/textView8"
-        android:layout_width="344dp"
-        android:layout_height="56dp"
-        android:layout_marginTop="12dp"
-        android:text="The numerical reasoning test measures your ability to use numerical information presented in a variety of ways as a tool to make decisions."
-        android:textColor="#F7FFFFFF"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.447"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ts" />
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cd1"
+            android:layout_width="250dp"
+            android:layout_height="120dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="32dp"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="8dp"
+            app:layout_column="0"
+            app:layout_columnWeight="1"
+            app:layout_row="0"
+            app:layout_rowWeight="1">
 
-    <TextView
-        android:id="@+id/textView9"
-        android:layout_width="344dp"
-        android:layout_height="57dp"
-        android:layout_marginTop="8dp"
-        android:text="In this test, you will be given numerical scenarios and asked several questions per scenario. For each question, you are given four possible answer options."
-        android:textColor="#F7FFFFFF"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.447"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
-    <TextView
-        android:id="@+id/textView10"
-        android:layout_width="344dp"
-        android:layout_height="26dp"
-        android:layout_marginTop="12dp"
-        android:text="Work out the correct answer to each question"
-        android:textColor="#F0FFFFFF"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.402"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView9" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/aclonica"
+                android:text="PRACTICE TEST"
+                android:textAlignment="center"
+                android:textColor="@android:color/black"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+        </androidx.cardview.widget.CardView>
 
-    <TextView
-        android:id="@+id/textView11"
-        android:layout_width="344dp"
-        android:layout_height="25dp"
-        android:layout_marginTop="12dp"
-        android:text="You may use a calculator if you wish"
-        android:textColor="#F2FFFFFF"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.402"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView10" />
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cd2"
+            android:layout_width="250dp"
+            android:layout_height="120dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="16dp"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="8dp"
+            app:layout_column="0"
+            app:layout_columnWeight="1"
+            app:layout_row="0"
+            app:layout_rowWeight="1">
 
-    <TextView
-        android:id="@+id/textView12"
-        android:layout_width="335dp"
-        android:layout_height="41dp"
-        android:layout_marginTop="12dp"
-        android:text="The speed of your Internet connection (dial-up or broadband) has NO effect on the timer.  "
-        android:textColor="#F2FFFFFF"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.394"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView11" />
 
-    <TextView
-        android:id="@+id/textView14"
-        android:layout_width="334dp"
-        android:layout_height="77dp"
-        android:layout_marginTop="12dp"
-        android:text="Work as quickly as you can while maintaining accuracy. Remember to work out the correct answer to each question using only the numerical information provided in the relevant scenario.  "
-        android:textColor="#F2FFFFFF"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.35"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView12" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/aclonica"
+                android:text="DAILY TEST"
+                android:textAlignment="center"
+                android:textColor="@android:color/black"
+                android:textSize="20dp"
+                android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/textView15"
-        android:layout_width="179dp"
-        android:layout_height="59dp"
-        android:gravity="center"
-        android:text="GOOD LUCK !!"
-        android:textColor="#F7DD0C0C"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/bn"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView14"
-        app:layout_constraintVertical_bias="0.323" />
 
+        </androidx.cardview.widget.CardView>
+
+    </GridLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

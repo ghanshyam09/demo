@@ -2,23 +2,23 @@
 <animation-list xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:drawable="@drawable/b"
-        android:duration="2000"
+        android:duration="3000"
         />
     <item
-        android:drawable="@drawable/a"
-        android:duration="2000"
+        android:drawable="@drawable/fade"
+        android:duration="3000"
         />
     <item
         android:drawable="@drawable/d"
-        android:duration="2000"
+        android:duration="3000"
         />
     <item
         android:drawable="@drawable/e"
-        android:duration="2000"
+        android:duration="3000"
         />
     <item
         android:drawable="@drawable/ff"
-        android:duration="2000"
+        android:duration="3000"
         />
 
 </animation-list>

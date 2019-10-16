@@ -1,8 +1,5 @@
 package com.example.demo;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -15,13 +12,14 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
 public class SecondActivity extends AppCompatActivity {
     EditText email;
@@ -29,7 +27,7 @@ public class SecondActivity extends AppCompatActivity {
     private TextView reset;
     private Button log;
     private FirebaseAuth fire;
-    private  Context ctx;
+
 
     private ProgressDialog progress;
     public DatabaseReference data;
@@ -58,7 +56,7 @@ public class SecondActivity extends AppCompatActivity {
         log.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final String mail=email.getText().toString().trim();
+                String mail=email.getText().toString().trim();
                 String pword=password.getText().toString().trim();
                 if(TextUtils.isEmpty(mail)){
                     Toast.makeText(SecondActivity.this,"Please enter the email",Toast.LENGTH_SHORT).show();

@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/result"
     tools:context=".Resultactivity">
 
     <TextView
@@ -31,7 +30,7 @@
         android:layout_height="69dp"
         android:gravity="center"
         android:text="Score :"
-        android:textColor="#F8FFFFFF"
+        android:textColor="@color/black"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
