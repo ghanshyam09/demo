@@ -1,5 +1,6 @@
 package com.example.demo;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.AnimationDrawable;
@@ -9,9 +10,11 @@ import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
@@ -34,13 +37,13 @@ public class Quiz extends AppCompatActivity
     private DatabaseReference ref;
     public FirebaseAuth auth;
     private Button b1,b2,b3,b4;
+     boolean  flag=false;
     private TextView question,quecount,counter;
    public int total=0;
    private ConstraintLayout layout;
 
     public int score=0;
      public int qcounter=10;
-
 
 
     @Override
@@ -317,9 +320,31 @@ public class Quiz extends AppCompatActivity
 
         ref.child(s).setValue(score);
     }
+    @Override
+    public void onBackPressed() {
+        AlertDialog.Builder alert=new AlertDialog.Builder(this);
+        alert.setMessage("Do you really want to quit the test");
+        alert.setCancelable(false);
+        alert.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+//                 stop();
+                flag=true;
+                finish();
+            }
+        });
+        alert.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+            }
+        });
+        AlertDialog alertDialog=alert.create();
+        alertDialog.show();
+    }
 
     public void reverseTimer(int seconds ,final TextView tv ) {
-        final CountDownTimer mCountDownTimer=new CountDownTimer(seconds * 10000, 1000) {
+        final CountDownTimer mCountDownTimer=new CountDownTimer(seconds * 1000, 1000) {
            @Override
             public void onTick(long millisUntilFinished) {
                 int seconds = (int) (millisUntilFinished / 1000);
@@ -331,11 +356,15 @@ public class Quiz extends AppCompatActivity
 
             @Override
             public void onFinish() {
-                if(total < 10) {
-                    Intent intent = new Intent(Quiz.this, Resultactivity.class);
-                    intent.putExtra("Score", String.valueOf(score));
-                    startActivity(intent);
-                    finish();
+
+                if (total < 10) {
+                        if(flag==false) {
+                            Intent intent = new Intent(Quiz.this, Resultactivity.class);
+                            intent.putExtra("Score", String.valueOf(score));
+                            startActivity(intent);
+                            finish();
+                        }
+
                 }
             }
         }.start();
@@ -347,15 +376,18 @@ public class Quiz extends AppCompatActivity
 
             @Override
             public void onFinish() {
-                if (total > 10) {
                     mCountDownTimer.cancel();
 
-                }
+
 
             }
+
         };
 
+
+
     }
+
 
 }
 

@@ -154,12 +154,13 @@ DatabaseReference ref,img;
             ApplicationInfo apk=getApplicationContext().getApplicationInfo();
             String apkpath=apk.sourceDir;
             Intent intent = new Intent((Intent.ACTION_SEND));
+            startActivity(Intent.createChooser(intent, "Share using"));
+
             intent.setType("application/vnd.android.package-archive");
 //            String body = "your body here";
 //            String sub = "your subject here";
             intent.putExtra(intent.EXTRA_STREAM, Uri.fromFile(new File(apkpath)));
             //intent.putExtra(intent.EXTRA_TEXT, sub);
-            startActivity(Intent.createChooser(intent, "Share using"));
         }
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

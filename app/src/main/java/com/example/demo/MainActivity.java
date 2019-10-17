@@ -73,25 +73,33 @@ public class MainActivity extends AppCompatActivity {
                 final String n = Name.getText().toString().trim();
                 final String p = pasword.getText().toString().trim();
                 final String e = mail.getText().toString().trim();
-                if (TextUtils.isEmpty(n)) {
+                if (TextUtils.isEmpty(n) && TextUtils.isEmpty(e) && TextUtils.isEmpty(p) ) {
                     Name.requestFocus();
-                    Toast.makeText(MainActivity.this, "Please enter the name", Toast.LENGTH_SHORT).show();
+                    mail.setError("please enter the email");
+                    Name.setError("please Enter the name");
+                    pasword.setError("please Enter the password");
+
+                    return;
+                }
+                if (TextUtils.isEmpty(n) ) {
+                    Name.requestFocus();
+                    Name.setError("please Enter the name");
                     return;
                 }
                 if (TextUtils.isEmpty(e)) {
+                    mail.setError("please enter the email");
                     mail.requestFocus();
-                    Toast.makeText(MainActivity.this, "Please enter the Email", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 if (TextUtils.isEmpty(p)) {
                     pasword.requestFocus();
-                    Toast.makeText(MainActivity.this, "Please enter the Password", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 if (pasword.length() < 6) {
-                    pasword.setError("Minmum length of password should be 6");
+                    pasword.setError("Minimum length of password should be 6");
                 }
 
+                FirebaseUser user = fire.getCurrentUser();
 
                 progress.setMessage("Registering");
                 progress.show();
@@ -122,7 +130,7 @@ public class MainActivity extends AppCompatActivity {
 
                                 } else {
                                     progress.cancel();
-                                    Toast.makeText(MainActivity.this, "check the email and password", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(MainActivity.this, "check the email ", Toast.LENGTH_SHORT).show();
                                 }
 
 

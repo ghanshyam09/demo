@@ -7,6 +7,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RatingBar;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.firebase.client.Firebase;
@@ -47,22 +48,6 @@ public class Feedback extends AppCompatActivity {
         data.child("Rating").setValue(r);
 
 
-//
-
-//            Firebase user=ref.child("Users");
-//
-//                Firebase ref_id=user.child(auth.getCurrentUser().getUid());
-//
-//                Firebase ref_feed=ref_id.child("Feedback");
-//                ref_feed.setValue(feed);
-//                Firebase ref_rating= ref_id.child("Rating");
-//                ref_rating.setValue(r);
-//                user usr =new user(name,email);
-//                Firebase ref_name=ref_id.child("username");
-//                ref_name.setValue(name);
-//                Firebase ref_email=ref_id.child("email_id");
-//                ref_email.setValue(email);
-
         Intent intent=new Intent(Feedback.this,FourActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
@@ -74,9 +59,11 @@ public class Feedback extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-       // progress.show();
-       // progress.onBackPressed();
-       // Toast.makeText(this,"wait",Toast.LENGTH_SHORT).show();
+        AlertDialog.Builder alert=new AlertDialog.Builder(this);
+        alert.setMessage("Please give feedback");
+        alert.setCancelable(true);
+        AlertDialog alertDialog=alert.create();
+        alertDialog.show();
     }
 
 
