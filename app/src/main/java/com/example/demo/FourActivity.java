@@ -52,8 +52,7 @@ DatabaseReference ref,img;
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 String uri=dataSnapshot.getValue(String.class);
-                Glide.with(getApplicationContext()).load(uri).into(profilepic);
-
+                Glide.with(getApplicationContext()).load(uri).placeholder(R.drawable.icon).into(profilepic);
             }
 
             @Override
@@ -115,7 +114,7 @@ DatabaseReference ref,img;
                      else
                      {
                          Intent intent=new Intent(FourActivity.this,Quiz.class);
-                          intent.putExtra("sub","Quiz");
+                          intent.putExtra("sub","Daily_Test");
                          startActivity(intent);
                      }
                  }

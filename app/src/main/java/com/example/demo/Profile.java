@@ -15,6 +15,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -37,7 +38,7 @@ public class Profile extends AppCompatActivity {
     Button upload;
     private ProgressDialog progress;
     private Uri resultUri;
-    DatabaseReference ref,ref2;
+    DatabaseReference ref,ref2,img;
     FirebaseStorage storage=FirebaseStorage.getInstance();
     private StorageReference mstorage=storage.getReference("uploads");
     @Override
@@ -90,6 +91,7 @@ public class Profile extends AppCompatActivity {
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                             progressDialog.dismiss();
                             Toast.makeText(Profile.this,"Uploaded",Toast.LENGTH_SHORT).show();
+
                             file.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                                 @Override
                                 public void onSuccess(Uri uri) {
@@ -98,6 +100,7 @@ public class Profile extends AppCompatActivity {
 
                                 }
                             });
+
                         }
                     })
                     .addOnFailureListener(new OnFailureListener() {
@@ -110,14 +113,15 @@ public class Profile extends AppCompatActivity {
 
         }
     }
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        @Override
+        public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
             CropImage.ActivityResult result = CropImage.getActivityResult(data);
             if (resultCode == RESULT_OK) {
                  resultUri = result.getUri();
                 try {
-                    Bitmap bitmap= MediaStore.Images.Media.getBitmap(getContentResolver(),resultUri);
+                     Bitmap bitmap= MediaStore.Images.Media.getBitmap(getContentResolver(),resultUri);
                 image.setImageBitmap(bitmap);
                     uploadimage();
                 } catch (IOException e) {
@@ -131,11 +135,25 @@ public class Profile extends AppCompatActivity {
         }
     }
 
-
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        finish();
+        img = FirebaseDatabase.getInstance().getReference().child("Users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("image");
+        img.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                String uri = dataSnapshot.getValue(String.class);
+                Glide.with(getApplicationContext()).load(uri).into(image);
+                Intent intent = new Intent(Profile.this, FourActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+            }
 
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+        finish();
     }
 }

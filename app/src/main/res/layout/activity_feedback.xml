@@ -9,24 +9,24 @@
 
     <RatingBar
         android:id="@+id/ratingBar"
-        style="@android:style/Widget.Holo.Light.RatingBar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/Widget.AppCompat.RatingBar"
+        android:layout_width="240dp"
+        android:layout_height="58dp"
         android:theme="@style/Base.AlertDialog.AppCompat"
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="0.561"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.366"
+        app:layout_constraintVertical_bias="0.206"
         tools:visibility="visible" />
 
     <EditText
         android:id="@+id/et2"
-        android:layout_width="331dp"
-        android:layout_height="186dp"
-        android:layout_marginTop="352dp"
+        android:layout_width="315dp"
+        android:layout_height="106dp"
+        android:layout_marginTop="272dp"
         android:background="@drawable/cust_border"
         android:ems="10"
         android:gravity="center_horizontal|center_vertical"
@@ -45,7 +45,7 @@
         android:background="@drawable/send"
         android:onClick="sendtofirebase"
         android:text="send"
-        android:textColor="@color/colorPrimary"
+        android:textColor="#111413"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -53,42 +53,18 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/et2"
-        app:layout_constraintVertical_bias="0.427" />
-
-    <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="122dp"
-        android:layout_height="128dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.861"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.069"
-        app:srcCompat="@drawable/star" />
-
-    <ImageView
-        android:id="@+id/imageView4"
-        android:layout_width="130dp"
-        android:layout_height="75dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.102"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.501"
-        app:srcCompat="@drawable/like" />
+        app:layout_constraintVertical_bias="0.276" />
 
     <ImageView
         android:id="@+id/imageView5"
-        android:layout_width="215dp"
-        android:layout_height="122dp"
+        android:layout_width="218dp"
+        android:layout_height="71dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.448"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.177"
+        app:layout_constraintVertical_bias="0.044"
         app:srcCompat="@drawable/stars" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
