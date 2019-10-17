@@ -25,6 +25,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.theartofdev.edmodo.cropper.CropImage;
@@ -49,6 +50,20 @@ public class Profile extends AppCompatActivity {
         text2=findViewById(R.id.textView16);
         image=findViewById(R.id.imageView2);
         upload=findViewById(R.id.button4);
+        img= FirebaseDatabase.getInstance().getReference().child("Users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("image");
+
+        img.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                String uri=dataSnapshot.getValue(String.class);
+                Glide.with(getApplicationContext()).load(uri).placeholder(R.drawable.icon).into(image);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
         ref2= FirebaseDatabase.getInstance().getReference().child("Users").child(FirebaseAuth.getInstance().getCurrentUser().getUid());
         ref= FirebaseDatabase.getInstance().getReference().child("Users").child(FirebaseAuth.getInstance().getCurrentUser().getUid());
             ref.addValueEventListener(new ValueEventListener() {
@@ -110,6 +125,7 @@ public class Profile extends AppCompatActivity {
                             Toast.makeText(Profile.this,"Failed",Toast.LENGTH_SHORT).show();
                         }
                     });
+
 
         }
     }
