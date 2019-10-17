@@ -41,7 +41,6 @@ public class Feedback extends AppCompatActivity {
 
         auth=FirebaseAuth.getInstance();
        data= FirebaseDatabase.getInstance().getReference().child("Users").child(auth.getCurrentUser().getUid());
-      //  FirebaseUser user=auth.getCurrentUser();
         String feed=feedbackToFirebase.getText().toString().trim();
         Float r=rating.getRating();
         data.child("Feedback").setValue(feed);

@@ -10,7 +10,6 @@ import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -73,7 +72,7 @@ public class Quiz extends AppCompatActivity
         counter=(TextView) findViewById(R.id.timer);
 
             updatequestion();
-            reverseTimer(10,counter);
+            reverseTimer(60,counter);
 
     }
     public void updatequestion()
@@ -211,7 +210,6 @@ public class Quiz extends AppCompatActivity
                         public void onClick(View v) {
                             if(b3.getText().toString().equals(questions.getAnswer()))
                             {
-                                //Toast.makeText(Quiz.this,"Correct answer",Toast.LENGTH_SHORT).show();
                                 score++;
                                 b3.setBackgroundColor(Color.GREEN);
                                 Handler handler=new Handler();
@@ -229,7 +227,6 @@ public class Quiz extends AppCompatActivity
                             }
                             else
                             {
-                                //Toast.makeText(Quiz.this,"wrong answer",Toast.LENGTH_SHORT).show();
                                 b3.setBackgroundColor(Color.RED);
                                 if(b1.getText().toString().equals(questions.getAnswer()))
                                 {
@@ -262,7 +259,6 @@ public class Quiz extends AppCompatActivity
                         public void onClick(View v) {
                             if(b4.getText().toString().equals(questions.getAnswer()))
                             {
-                                //Toast.makeText(Quiz.this,"Correct answer",Toast.LENGTH_SHORT).show();
                                 score++;
                                 b4.setBackgroundColor(Color.GREEN);
                                 Handler handler=new Handler();
@@ -280,7 +276,6 @@ public class Quiz extends AppCompatActivity
                             }
                             else
                             {
-                                //Toast.makeText(Quiz.this,"wrong answer",Toast.LENGTH_SHORT).show();
                                 b4.setBackgroundColor(Color.RED);
                                 if(b1.getText().toString().equals(questions.getAnswer()))
                                 {
@@ -328,7 +323,6 @@ public class Quiz extends AppCompatActivity
         alert.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-//                 stop();
                 flag=true;
                 finish();
             }
@@ -344,14 +338,13 @@ public class Quiz extends AppCompatActivity
     }
 
     public void reverseTimer(int seconds ,final TextView tv ) {
-        final CountDownTimer mCountDownTimer=new CountDownTimer(seconds * 1000, 1000) {
+        final CountDownTimer mCountDownTimer=new CountDownTimer(seconds * 5000, 1000) {
            @Override
             public void onTick(long millisUntilFinished) {
                 int seconds = (int) (millisUntilFinished / 1000);
                 int minutes = seconds / 60;
                 seconds = seconds % 60;
                 tv.setText(String.format("%02d", minutes) + ":" + (String.format("%02d", seconds)));
-                //finish();
             }
 
             @Override
@@ -368,7 +361,7 @@ public class Quiz extends AppCompatActivity
                 }
             }
         }.start();
-        new CountDownTimer(seconds*1000+1000,1000) {
+        new CountDownTimer(seconds*5000,1000) {
             @Override
             public void onTick(long millisUntilFinished) {
 
@@ -377,9 +370,6 @@ public class Quiz extends AppCompatActivity
             @Override
             public void onFinish() {
                     mCountDownTimer.cancel();
-
-
-
             }
 
         };

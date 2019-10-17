@@ -36,11 +36,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        //layout=findViewById(R.id.layout);
-//              AnimationDrawable animationDrawable=(AnimationDrawable)layout.getBackground();
-//            animationDrawable.setEnterFadeDuration(3000);
-//        animationDrawable.setExitFadeDuration(2000);
-//        animationDrawable.start();
         Name = findViewById(R.id.etuser);
         pasword = findViewById(R.id.etpassword);
         login = findViewById(R.id.textView4);
@@ -74,25 +69,22 @@ public class MainActivity extends AppCompatActivity {
                 final String p = pasword.getText().toString().trim();
                 final String e = mail.getText().toString().trim();
                 if (TextUtils.isEmpty(n) && TextUtils.isEmpty(e) && TextUtils.isEmpty(p) ) {
-                    Name.requestFocus();
-                    mail.setError("please enter the email");
-                    Name.setError("please Enter the name");
-                    pasword.setError("please Enter the password");
+                    mail.setError("please enter the E-Mail");
+                    Name.setError("please Enter the Name");
+                    pasword.setError("please Enter the Password");
 
                     return;
                 }
                 if (TextUtils.isEmpty(n) ) {
-                    Name.requestFocus();
-                    Name.setError("please Enter the name");
+                    Name.setError("please Enter the Name");
                     return;
                 }
                 if (TextUtils.isEmpty(e)) {
-                    mail.setError("please enter the email");
-                    mail.requestFocus();
+                    mail.setError("please enter the E-Mail");
                     return;
                 }
                 if (TextUtils.isEmpty(p)) {
-                    pasword.requestFocus();
+                    pasword.setError("please enter the Password");
                     return;
                 }
                 if (pasword.length() < 6) {
@@ -120,6 +112,9 @@ public class MainActivity extends AppCompatActivity {
                                                 Toast.makeText(MainActivity.this, "Please check your mail", Toast.LENGTH_SHORT).show();
                                                 user user=new user(n,e);
                                                 data.setValue(user);
+                                                Name.setText("");
+                                                pasword.setText("");
+                                                mail.setText("");
 
                                             } else {
                                                 String error = task.getException().getMessage();

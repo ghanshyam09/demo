@@ -147,9 +147,7 @@ DatabaseReference ref,img;
             edit.putString("login_Status","off");
             edit.commit();
 
-        } else if (id == R.id.settings) {
-
-        } else if (id == R.id.nav_share) {
+        }  else if (id == R.id.nav_share) {
             ApplicationInfo apk=getApplicationContext().getApplicationInfo();
             String apkpath=apk.sourceDir;
             Intent intent = new Intent((Intent.ACTION_SEND));

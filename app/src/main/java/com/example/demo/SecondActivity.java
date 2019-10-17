@@ -58,12 +58,19 @@ public class SecondActivity extends AppCompatActivity {
             public void onClick(View view) {
                 String mail=email.getText().toString().trim();
                 String pword=password.getText().toString().trim();
+                if(TextUtils.isEmpty(mail)&&TextUtils.isEmpty(pword))
+                {
+                    email.setError("please enter your E-Mail");
+                    password.setError("please enter your password");
+
+                    return;
+                }
                 if(TextUtils.isEmpty(mail)){
-                    Toast.makeText(SecondActivity.this,"Please enter the email",Toast.LENGTH_SHORT).show();
+                    email.setError("please enter your E-Mail");
                     return;
                 }
                 if(TextUtils.isEmpty(pword)) {
-                    Toast.makeText(SecondActivity.this, "Please enter the Password", Toast.LENGTH_SHORT).show();
+                    password.setError("please enter your password");
                     return;
                 }
 

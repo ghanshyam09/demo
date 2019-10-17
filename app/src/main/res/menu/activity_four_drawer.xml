@@ -13,10 +13,6 @@
             android:icon="@drawable/ic_person_black_24dp"
             android:title="Profile" />
         <item
-            android:id="@+id/settings"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="Settings" />
-        <item
             android:id="@+id/Logout"
             android:icon="@drawable/ic_logout"
             android:title="Logout" />

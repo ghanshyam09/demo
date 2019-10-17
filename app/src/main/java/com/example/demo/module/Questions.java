@@ -2,8 +2,7 @@ package com.example.demo.module;
 
 public class Questions
 {
-    String question;
-            String option1,option2,option3,option4,answer;
+    String question,option1,option2,option3,option4,answer;
 
 
     public Questions(String question, String option1, String option2, String option3, String option4, String answer) {
