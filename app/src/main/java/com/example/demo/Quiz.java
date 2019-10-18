@@ -77,7 +77,7 @@ public class Quiz extends AppCompatActivity
     }
     public void updatequestion()
     {
-       int random= new  Random().nextInt(19)+1;
+       int random= new  Random().nextInt(24)+1;
         total++;
         Intent i=getIntent();
         String s=i.getStringExtra("sub");
@@ -124,7 +124,7 @@ public class Quiz extends AppCompatActivity
                                         b4.setBackgroundColor(Color.parseColor("#03A9F4"));
                                      updatequestion();
                                     }
-                                },500);
+                                },1000);
                             }
                             else
                             {
@@ -152,7 +152,7 @@ public class Quiz extends AppCompatActivity
                                        b4.setBackgroundColor(Color.parseColor("#03A9F4"));
                                        updatequestion();
                                    }
-                               },500);
+                               },1000);
                             }
                         }
                     });
@@ -174,7 +174,7 @@ public class Quiz extends AppCompatActivity
                                         b4.setBackgroundColor(Color.parseColor("#03A9F4"));
                                         updatequestion();
                                     }
-                                },500);
+                                },1000);
                             }
                             else
                             {
@@ -201,7 +201,7 @@ public class Quiz extends AppCompatActivity
                                         b4.setBackgroundColor(Color.parseColor("#03A9F4"));
                                         updatequestion();
                                     }
-                                },500);
+                                },1000);
                             }
                         }
                     });
@@ -223,7 +223,7 @@ public class Quiz extends AppCompatActivity
                                         b4.setBackgroundColor(Color.parseColor("#03A9F4"));
                                         updatequestion();
                                     }
-                                },500);
+                                },1000);
                             }
                             else
                             {
@@ -250,7 +250,7 @@ public class Quiz extends AppCompatActivity
                                         b4.setBackgroundColor(Color.parseColor("#03A9F4"));
                                         updatequestion();
                                     }
-                                },500);
+                                },1000);
                             }
                         }
                     });
@@ -272,7 +272,7 @@ public class Quiz extends AppCompatActivity
                                         b4.setBackgroundColor(Color.parseColor("#03A9F4"));
                                         updatequestion();
                                     }
-                                },500);
+                                },1000);
                             }
                             else
                             {
@@ -299,7 +299,7 @@ public class Quiz extends AppCompatActivity
                                         b4.setBackgroundColor(Color.parseColor("#03A9F4"));
                                         updatequestion();
                                     }
-                                },500);
+                                },1000);
                             }
                         }
                     });

@@ -27,8 +27,6 @@ public class SecondActivity extends AppCompatActivity {
     private TextView reset;
     private Button log;
     private FirebaseAuth fire;
-
-
     private ProgressDialog progress;
     public DatabaseReference data;
 

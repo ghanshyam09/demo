@@ -3,8 +3,6 @@ package com.example.demo;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.ApplicationInfo;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -28,8 +26,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
-import java.io.File;
 
 public class FourActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -102,7 +98,7 @@ DatabaseReference ref,img;
          for(int i=0;i<grid.getChildCount();i++)
          {
              CardView cardView=(CardView)grid.getChildAt(i);
-            final int j=i;
+             final int j=i;
              cardView.setOnClickListener(new View.OnClickListener() {
                  @Override
                  public void onClick(View v) {
@@ -147,17 +143,6 @@ DatabaseReference ref,img;
             edit.putString("login_Status","off");
             edit.commit();
 
-        }  else if (id == R.id.nav_share) {
-            ApplicationInfo apk=getApplicationContext().getApplicationInfo();
-            String apkpath=apk.sourceDir;
-            Intent intent = new Intent((Intent.ACTION_SEND));
-            startActivity(Intent.createChooser(intent, "Share using"));
-
-            intent.setType("application/vnd.android.package-archive");
-//            String body = "your body here";
-//            String sub = "your subject here";
-            intent.putExtra(intent.EXTRA_STREAM, Uri.fromFile(new File(apkpath)));
-            //intent.putExtra(intent.EXTRA_TEXT, sub);
         }
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

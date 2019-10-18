@@ -18,7 +18,6 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class Feedback extends AppCompatActivity {
     private Firebase ref;
-    private EditText Name,mail;
     private RatingBar rating;
     private EditText feedbackToFirebase;
      private Button send;

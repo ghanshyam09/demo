@@ -25,7 +25,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.theartofdev.edmodo.cropper.CropImage;
@@ -138,7 +137,7 @@ public class Profile extends AppCompatActivity {
                  resultUri = result.getUri();
                 try {
                      Bitmap bitmap= MediaStore.Images.Media.getBitmap(getContentResolver(),resultUri);
-                image.setImageBitmap(bitmap);
+                     image.setImageBitmap(bitmap);
                     uploadimage();
                 } catch (IOException e) {
                     e.printStackTrace();

@@ -91,8 +91,6 @@ public class MainActivity extends AppCompatActivity {
                     pasword.setError("Minimum length of password should be 6");
                 }
 
-                FirebaseUser user = fire.getCurrentUser();
-
                 progress.setMessage("Registering");
                 progress.show();
                 fire.createUserWithEmailAndPassword(e, p)
@@ -100,7 +98,6 @@ public class MainActivity extends AppCompatActivity {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if (task.isSuccessful()) {
-                                    progress.cancel();
                                     Toast.makeText(MainActivity.this, "Successful", Toast.LENGTH_SHORT).show();
                                     progress.cancel();
                                     FirebaseUser user = fire.getCurrentUser();

@@ -10,7 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class Resultactivity extends AppCompatActivity {
 
-    private TextView v_tq,v_score;
+    private TextView v_score;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -18,7 +18,6 @@ public class Resultactivity extends AppCompatActivity {
         v_score=(TextView)findViewById(R.id.vscore);
 
         Intent i=getIntent();
-
         String score=i.getStringExtra("Score");
 
         v_score.setText(score);
